@@ -1,0 +1,49 @@
+{
+  "Seeds": [
+    "unlimited ai tokens",
+    "context engineering",
+    "what is an mcp server",
+    "spec-driven development",
+    "ai governance framework"
+  ],
+  "Terms": [
+    "MCP",
+    "MCP server",
+    "workbench",
+    "fAI",
+    "OpenX",
+    "Claude Code",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "context engineering",
+    "spec-driven",
+    "loop engineering",
+    "compounding engineering",
+    "AI governance",
+    "SEO",
+    "keyword",
+    "sitemap",
+    "landing page",
+    "pricing",
+    "Fathym Workshops"
+  ],
+  "Exclude": [
+    "social engineering"
+  ],
+  "Pages": [
+    "/fai",
+    "/openx",
+    "/workbenches",
+    "/platform",
+    "/blog"
+  ],
+  "Target": "fathym.com",
+  "LocationCode": 2840,
+  "LanguageCode": "en",
+  "RankedLimit": 1000,
+  "IdeasPerSeed": 100,
+  "AdsVolume": true,
+  "Candidates": 100,
+  "SerpTop": 20,
+  "MaxEstimatedCost": 1
+}

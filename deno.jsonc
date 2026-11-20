@@ -1,0 +1,19 @@
+{
+  "tasks": {
+    "mcp": "fai run search-health.ts --mode MCP",
+    "api": "fai run search-health.ts --mode API",
+    "web": "fai run search-health.ts --mode Web",
+    "test": "deno test -A"
+  },
+  // `fai run` imports the bare "@fathym/fai/*" specifiers through this file. fAI is pinned to the CLI
+  // that runs it (0.0.1009); steward, zod and the MCP SDK match fAI's own pins at that version, so one
+  // copy of each loads.
+  "imports": {
+    "@fathym/fai": "jsr:@fathym/fai@0.0.1009",
+    "@fathym/steward": "jsr:@fathym/steward@0.1.44",
+    "@modelcontextprotocol/sdk": "npm:@modelcontextprotocol/sdk@1.27.1",
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/path": "jsr:@std/path@1",
+    "zod": "npm:zod@4.1.13"
+  }
+}

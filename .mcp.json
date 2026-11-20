@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "search-health": {
+      "type": "stdio",
+      "command": "fai",
+      "args": ["run", "search-health.ts", "--mode", "MCP"],
+      "env": {
+        "SEARCH_HEALTH_DATA": "${SEARCH_HEALTH_DATA:-}",
+        "DATAFORSEO_ENV_FILE": "${DATAFORSEO_ENV_FILE:-}",
+        "GSC_CREDENTIALS": "${GSC_CREDENTIALS:-}",
+        "GSC_PROPERTY": "${GSC_PROPERTY:-}",
+        "FATHYM_DEV_SPACE": "${FATHYM_DEV_SPACE:-}",
+        "HOME": "${HOME}",
+        "PATH": "${PATH}"
+      }
+    }
+  }
+}

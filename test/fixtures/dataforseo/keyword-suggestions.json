@@ -1,0 +1,639 @@
+{
+ "status_code": 20000,
+ "status_message": "Ok.",
+ "time": "0.4007 sec.",
+ "cost": 0.018,
+ "tasks_count": 1,
+ "tasks_error": 0,
+ "tasks": [
+  {
+   "status_code": 20000,
+   "status_message": "Ok.",
+   "time": "0.2484 sec.",
+   "cost": 0.018,
+   "result_count": 1,
+   "data": {
+    "api": "dataforseo_labs",
+    "function": "keyword_suggestions",
+    "se_type": "google",
+    "keyword": "context engineering",
+    "location_code": 2840,
+    "language_code": "en",
+    "limit": 50
+   },
+   "result": [
+    {
+     "se_type": "google",
+     "seed_keyword": "context engineering",
+     "seed_keyword_data": null,
+     "location_code": 2840,
+     "language_code": "en",
+     "total_count": 573,
+     "items_count": 50,
+     "offset": 0,
+     "items": [
+      {
+       "se_type": "google",
+       "keyword": "context engineering",
+       "location_code": 2840,
+       "language_code": "en",
+       "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2026-09-17 01:15:53 +00:00",
+        "competition": 0.25,
+        "competition_level": "LOW",
+        "cpc": 12.71,
+        "search_volume": 4400,
+        "low_top_of_page_bid": 1.67,
+        "high_top_of_page_bid": 25,
+        "categories": [
+         10004,
+         10273,
+         13732
+        ],
+        "monthly_searches": [
+         {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 3600
+         },
+         {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 3600
+         },
+         {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 3600
+         },
+         {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 4400
+         },
+         {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 5400
+         },
+         {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 5400
+         },
+         {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 4400
+         },
+         {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 4400
+         },
+         {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 3600
+         },
+         {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 4400
+         },
+         {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 6600
+         },
+         {
+          "year": 2025,
+          "month": 9,
+          "search_volume": 6600
+         }
+        ],
+        "search_volume_trend": {
+         "monthly": 0,
+         "quarterly": 0,
+         "yearly": -56
+        }
+       },
+       "keyword_info_normalized_with_bing": null,
+       "keyword_info_normalized_with_clickstream": null,
+       "clickstream_keyword_info": null,
+       "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": "context engineer",
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 41,
+        "detected_language": "en",
+        "is_another_language": false,
+        "words_count": 2
+       },
+       "serp_info": null,
+       "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 969.5,
+        "dofollow": 614,
+        "referring_pages": 744,
+        "referring_domains": 276.7,
+        "referring_main_domains": 257.7,
+        "rank": 196.6,
+        "main_domain_rank": 573.6,
+        "last_updated_time": "2026-09-03 14:56:37 +00:00"
+       },
+       "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": null,
+        "last_updated_time": "2026-04-29 05:39:31 +00:00"
+       }
+      },
+      {
+       "se_type": "google",
+       "keyword": "what is context engineering",
+       "location_code": 2840,
+       "language_code": "en",
+       "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2026-11-20 16:07:23 +00:00",
+        "competition": 0.15,
+        "competition_level": "LOW",
+        "cpc": 6.29,
+        "search_volume": 880,
+        "low_top_of_page_bid": 1.66,
+        "high_top_of_page_bid": 11.02,
+        "categories": [
+         10108,
+         10756,
+         13429
+        ],
+        "monthly_searches": [
+         {
+          "year": 2026,
+          "month": 10,
+          "search_volume": 1000
+         },
+         {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 1000
+         },
+         {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 1000
+         },
+         {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 880
+         },
+         {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1000
+         },
+         {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 880
+         },
+         {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 880
+         },
+         {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 880
+         },
+         {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 720
+         },
+         {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 590
+         },
+         {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 480
+         },
+         {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 590
+         }
+        ],
+        "search_volume_trend": {
+         "monthly": 0,
+         "quarterly": 0,
+         "yearly": 39
+        }
+       },
+       "keyword_info_normalized_with_bing": null,
+       "keyword_info_normalized_with_clickstream": null,
+       "clickstream_keyword_info": null,
+       "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": null,
+        "synonym_clustering_algorithm": "keyword_metrics",
+        "keyword_difficulty": 34,
+        "detected_language": "en",
+        "is_another_language": false,
+        "words_count": 4
+       },
+       "serp_info": null,
+       "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 154.8,
+        "dofollow": 96.2,
+        "referring_pages": 129.3,
+        "referring_domains": 59,
+        "referring_main_domains": 57.8,
+        "rank": 192.1,
+        "main_domain_rank": 628,
+        "last_updated_time": "2026-11-15 14:14:47 +00:00"
+       },
+       "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": null,
+        "last_updated_time": "2026-05-05 02:30:26 +00:00"
+       }
+      },
+      {
+       "se_type": "google",
+       "keyword": "agentic context engineering",
+       "location_code": 2840,
+       "language_code": "en",
+       "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2026-11-20 13:02:51 +00:00",
+        "competition": 0.27,
+        "competition_level": "LOW",
+        "cpc": 12.11,
+        "search_volume": 390,
+        "low_top_of_page_bid": 4.55,
+        "high_top_of_page_bid": 17.29,
+        "categories": [
+         10004,
+         10276,
+         11089
+        ],
+        "monthly_searches": [
+         {
+          "year": 2026,
+          "month": 10,
+          "search_volume": 210
+         },
+         {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 210
+         },
+         {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 210
+         },
+         {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 260
+         },
+         {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 260
+         },
+         {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 320
+         },
+         {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 480
+         },
+         {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 590
+         },
+         {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 590
+         },
+         {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 590
+         },
+         {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 720
+         },
+         {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 880
+         }
+        ],
+        "search_volume_trend": {
+         "monthly": 0,
+         "quarterly": 0,
+         "yearly": -94
+        }
+       },
+       "keyword_info_normalized_with_bing": null,
+       "keyword_info_normalized_with_clickstream": null,
+       "clickstream_keyword_info": null,
+       "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": null,
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 30,
+        "detected_language": "en",
+        "is_another_language": false,
+        "words_count": 3
+       },
+       "serp_info": null,
+       "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 207.5,
+        "dofollow": 138.8,
+        "referring_pages": 160.3,
+        "referring_domains": 77.1,
+        "referring_main_domains": 76.2,
+        "rank": 148.8,
+        "main_domain_rank": 655.8,
+        "last_updated_time": "2026-11-17 19:03:55 +00:00"
+       },
+       "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": null,
+        "last_updated_time": "2026-05-05 11:30:47 +00:00"
+       }
+      },
+      {
+       "se_type": "google",
+       "keyword": "context engineering vs prompt engineering",
+       "location_code": 2840,
+       "language_code": "en",
+       "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2026-10-19 16:31:31 +00:00",
+        "competition": 0,
+        "competition_level": "LOW",
+        "cpc": null,
+        "search_volume": 390,
+        "low_top_of_page_bid": null,
+        "high_top_of_page_bid": null,
+        "categories": [
+         10019,
+         10168,
+         10885,
+         12197
+        ],
+        "monthly_searches": [
+         {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 320
+         },
+         {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 260
+         },
+         {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 390
+         },
+         {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 390
+         },
+         {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 390
+         },
+         {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 590
+         },
+         {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 590
+         },
+         {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 480
+         },
+         {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 390
+         },
+         {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 390
+         },
+         {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 390
+         },
+         {
+          "year": 2025,
+          "month": 10,
+          "search_volume": 590
+         }
+        ],
+        "search_volume_trend": {
+         "monthly": 23,
+         "quarterly": -18,
+         "yearly": -18
+        }
+       },
+       "keyword_info_normalized_with_bing": null,
+       "keyword_info_normalized_with_clickstream": null,
+       "clickstream_keyword_info": null,
+       "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": null,
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 27,
+        "detected_language": "en",
+        "is_another_language": false,
+        "words_count": 5
+       },
+       "serp_info": null,
+       "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 683.8,
+        "dofollow": 414.8,
+        "referring_pages": 507,
+        "referring_domains": 203,
+        "referring_main_domains": 186,
+        "rank": 152.5,
+        "main_domain_rank": 543.3,
+        "last_updated_time": "2026-08-03 20:07:22 +00:00"
+       },
+       "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": [
+         "commercial"
+        ],
+        "last_updated_time": "2026-05-03 09:01:05 +00:00"
+       }
+      },
+      {
+       "se_type": "google",
+       "keyword": "context engineering skill",
+       "location_code": 2840,
+       "language_code": "en",
+       "keyword_info": {
+        "se_type": "google",
+        "last_updated_time": "2026-11-16 22:15:02 +00:00",
+        "competition": 0.29,
+        "competition_level": "LOW",
+        "cpc": 9.27,
+        "search_volume": 320,
+        "low_top_of_page_bid": 3.08,
+        "high_top_of_page_bid": 10,
+        "categories": [
+         10004,
+         10019,
+         10168,
+         10276,
+         10885,
+         11084,
+         11089,
+         12197,
+         12370
+        ],
+        "monthly_searches": [
+         {
+          "year": 2026,
+          "month": 10,
+          "search_volume": 140
+         },
+         {
+          "year": 2026,
+          "month": 9,
+          "search_volume": 170
+         },
+         {
+          "year": 2026,
+          "month": 8,
+          "search_volume": 260
+         },
+         {
+          "year": 2026,
+          "month": 7,
+          "search_volume": 590
+         },
+         {
+          "year": 2026,
+          "month": 6,
+          "search_volume": 1000
+         },
+         {
+          "year": 2026,
+          "month": 5,
+          "search_volume": 1600
+         },
+         {
+          "year": 2026,
+          "month": 4,
+          "search_volume": 10
+         },
+         {
+          "year": 2026,
+          "month": 3,
+          "search_volume": 10
+         },
+         {
+          "year": 2026,
+          "month": 2,
+          "search_volume": 10
+         },
+         {
+          "year": 2026,
+          "month": 1,
+          "search_volume": 10
+         },
+         {
+          "year": 2025,
+          "month": 12,
+          "search_volume": 0
+         },
+         {
+          "year": 2025,
+          "month": 11,
+          "search_volume": 0
+         }
+        ],
+        "search_volume_trend": {
+         "monthly": -18,
+         "quarterly": -46,
+         "yearly": null
+        }
+       },
+       "keyword_info_normalized_with_bing": null,
+       "keyword_info_normalized_with_clickstream": null,
+       "clickstream_keyword_info": null,
+       "keyword_properties": {
+        "se_type": "google",
+        "core_keyword": null,
+        "synonym_clustering_algorithm": "text_processing",
+        "keyword_difficulty": 4,
+        "detected_language": "en",
+        "is_another_language": false,
+        "words_count": 3
+       },
+       "serp_info": null,
+       "avg_backlinks_info": {
+        "se_type": "google",
+        "backlinks": 121.1,
+        "dofollow": 94.2,
+        "referring_pages": 100.4,
+        "referring_domains": 18.7,
+        "referring_main_domains": 18.2,
+        "rank": 66,
+        "main_domain_rank": 604.1,
+        "last_updated_time": "2026-09-10 17:09:03 +00:00"
+       },
+       "search_intent_info": {
+        "se_type": "google",
+        "main_intent": "informational",
+        "foreign_intent": null,
+        "last_updated_time": "2026-06-01 22:39:42 +00:00"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

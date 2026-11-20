@@ -1,0 +1,785 @@
+{
+ "status_code": 20000,
+ "status_message": "Ok.",
+ "time": "3.5035 sec.",
+ "cost": 0.002,
+ "tasks_count": 1,
+ "tasks_error": 0,
+ "tasks": [
+  {
+   "status_code": 20000,
+   "status_message": "Ok.",
+   "time": "2.9642 sec.",
+   "cost": 0.002,
+   "result_count": 1,
+   "data": {
+    "api": "serp",
+    "function": "live",
+    "se": "google",
+    "se_type": "organic",
+    "keyword": "context engineering",
+    "location_code": 2840,
+    "language_code": "en",
+    "depth": 10,
+    "load_async_ai_overview": true,
+    "device": "desktop",
+    "os": "windows"
+   },
+   "result": [
+    {
+     "keyword": "context engineering",
+     "type": "organic",
+     "se_domain": "google.com",
+     "location_code": 2840,
+     "language_code": "en",
+     "check_url": "https://www.google.com/search?q=context%20engineering&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+     "datetime": "2026-11-20 16:22:17 +00:00",
+     "spell": null,
+     "refinement_chips": null,
+     "item_types": [
+      "ai_overview",
+      "organic",
+      "video",
+      "people_also_ask",
+      "related_searches"
+     ],
+     "se_results_count": 93,
+     "pages_count": 1,
+     "items_count": 12,
+     "items": [
+      {
+       "type": "ai_overview",
+       "rank_group": 1,
+       "rank_absolute": 1,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+       "asynchronous_ai_overview": false,
+       "markdown": "**Context engineering** is `the practice of dynamically curating, structuring, and managing the exact information, instructions, tools, and memory inside an LLM's context window at each step of execution` . It treats the context window like system RAM\u2014prioritizing high-signal data over sheer token volume to prevent accuracy drops and hallucinations.[[1]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[2]](https://google.com/goto?url=CAESagHEIkXXnbCKVx5YFwAklc1PlMP8vvJphvZD5hdzUqyBJaR7GK_7PhezWgGFqclMReHpaawqPA0lvzwQbXzgDle1JYSkA2aAviJQoNGLSPz6FurrZgbNhtoktzwzTSfPy-N733_v0ov_bUA)[[3]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)[[4]](https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_)[[5]](https://google.com/goto?url=CAESfQHEIkXX9koS-0e8ch6Bz5PJ9i1fhgqv4QHRrBuFwLDI6MYI2BTZSQtGOWNsOjG7NHIxAoA9PL2ckxh30GhQSqoCiQc7jxiIHb2jORip93ExwFiwLMbpBLjU-GbJyX4jTjqoNlBK412wzd4TRlUieI6GH5zSCdzuKU4sTphl)[[6]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)\n\n### Context Engineering vs. Prompt Engineering\n\n- **Prompt engineering** focuses on wording instructions and formatting a single prompt or system message.\n- **Context engineering** encompasses prompt engineering *plus* everything the model sees at inference time across multi-turn or agentic workflows\u2014including retrieved documents (RAG), tool definitions and outputs, conversation history, scratchpads, and long-term memory.[[1]](https://google.com/goto?url=CAESagHEIkXXnbCKVx5YFwAklc1PlMP8vvJphvZD5hdzUqyBJaR7GK_7PhezWgGFqclMReHpaawqPA0lvzwQbXzgDle1JYSkA2aAviJQoNGLSPz6FurrZgbNhtoktzwzTSfPy-N733_v0ov_bUA)[[2]](https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_)[[3]](https://www.youtube.com/watch?v=lcpWbg0jiYU)[[4]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)\n\n### Why It Matters (\"Context Rot\")\n\nEven as context windows grow larger, stuffing them with noisy, stale, or contradictory data degrades model reliability\u2014a phenomenon known as **context rot** . Common failure modes include:[[1]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)[[2]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[3]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)\n\n- **Context poisoning:** False or unverified claims entering the window and getting treated as fact.\n- **Context distraction:** Excessive history or irrelevant details steering the model off track.\n- **Context confusion:** Too many tools or cluttered instructions making selection error-prone.\n- **Context clash:** Conflicting facts or rules inside the same context window.[[1]](https://www.youtube.com/watch?v=BwXremQ-i6I&t=17)[[2]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)\n\n### Core Strategies\n\n- **Select:** Retrieve only relevant records, files, or memories just in time (via RAG, search, or metadata) rather than dumping entire datasets upfront.\n- **Compress:** Summarize long histories, prune stale tool outputs, or trim low-value tokens to keep signal high and costs down.\n- **Write:** Offload notes, plans, or state to external storage (scratchpads, files, or long-term memory) outside the active window.\n- **Isolate:** Split work across sub-agents or separate contexts so one task's noise does not pollute another.[[1]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)[[2]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[3]](https://www.youtube.com/watch?v=BwXremQ-i6I&t=17)[[4]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)\n\nFor deeper technical guides and hands-on practice, see [Anthropic's research on context engineering for AI agents](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U) , the [Context Engineering Guide](https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw) , and the [DeepLearning.AI Context Engineering course](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw).[[1]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[2]](https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw)[[3]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)Are you building an **AI agent** , optimizing a **RAG pipeline** , or looking for **practical implementation patterns** (such as compaction, memory, or tool design)? Tell me what you're working on and I can tailor next steps.",
+       "items": [
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": null,
+         "text": "Context engineering is the practice of dynamically curating, structuring, and managing the exact information, instructions, tools, and memory inside an LLM's context window at each step of execution. It treats the context window like system RAM\u2014prioritizing high-signal data over sheer token volume to prevent accuracy drops and hallucinations.",
+         "markdown": "**Context engineering** is `the practice of dynamically curating, structuring, and managing the exact information, instructions, tools, and memory inside an LLM's context window at each step of execution` . It treats the context window like system RAM\u2014prioritizing high-signal data over sheer token volume to prevent accuracy drops and hallucinations.[[1]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[2]](https://google.com/goto?url=CAESagHEIkXXnbCKVx5YFwAklc1PlMP8vvJphvZD5hdzUqyBJaR7GK_7PhezWgGFqclMReHpaawqPA0lvzwQbXzgDle1JYSkA2aAviJQoNGLSPz6FurrZgbNhtoktzwzTSfPy-N733_v0ov_bUA)[[3]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)[[4]](https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_)[[5]](https://google.com/goto?url=CAESfQHEIkXX9koS-0e8ch6Bz5PJ9i1fhgqv4QHRrBuFwLDI6MYI2BTZSQtGOWNsOjG7NHIxAoA9PL2ckxh30GhQSqoCiQc7jxiIHb2jORip93ExwFiwLMbpBLjU-GbJyX4jTjqoNlBK412wzd4TRlUieI6GH5zSCdzuKU4sTphl)[[6]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)",
+         "links": null,
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Anthropic",
+           "domain": "www.anthropic.com",
+           "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+           "title": "Effective context engineering for AI agents \\ Anthropic",
+           "text": "Definition: Context engineering curates optimal token sets for LLM inference against attention scarcity and context rot. Component..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Philschmid",
+           "domain": "www.philschmid.de",
+           "url": "https://www.philschmid.de/context-engineering",
+           "title": "The New Skill in AI is Not Prompting, It's Context Engineering",
+           "text": "Definition: Context engineering is the dynamic system discipline of providing an LLM the right information, tools, and format at t..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "LangChain",
+           "domain": "www.langchain.com",
+           "url": "https://www.langchain.com/blog/context-engineering-for-agents",
+           "title": "Context Engineering",
+           "text": "Context Engineering: Managing LLM context windows by filling them with optimal information per agent step across instructions, kno..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "IBM",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_",
+           "title": "What Is Context Engineering? | IBM",
+           "text": "# Context engineering, defined Context engineering is the practice of deliberately designing, structuring and optimizing the conte..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Splunk",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAESfQHEIkXX9koS-0e8ch6Bz5PJ9i1fhgqv4QHRrBuFwLDI6MYI2BTZSQtGOWNsOjG7NHIxAoA9PL2ckxh30GhQSqoCiQc7jxiIHb2jORip93ExwFiwLMbpBLjU-GbJyX4jTjqoNlBK412wzd4TRlUieI6GH5zSCdzuKU4sTphl",
+           "title": "What Is Context Engineering? - Splunk",
+           "text": "Context engineering moves beyond simple prompt crafting by treating the context window as a managed resource\u2014analogous to system R..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23",
+           "title": "Context engineering explained: What every AI developer should know",
+           "text": "Context engineering explained: What every AI developer should know systems smarter and way more reliable by the end of this video ..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": "Context Engineering vs. Prompt Engineering",
+         "text": "Prompt engineering focuses on wording instructions and formatting a single prompt or system message. Context engineering encompasses prompt engineering plus everything the model sees at inference time across multi-turn or agentic workflows\u2014including retrieved documents (RAG), tool definitions and outputs, conversation history, scratchpads, and long-term memory.",
+         "markdown": "- **Prompt engineering** focuses on wording instructions and formatting a single prompt or system message.\n- **Context engineering** encompasses prompt engineering *plus* everything the model sees at inference time across multi-turn or agentic workflows\u2014including retrieved documents (RAG), tool definitions and outputs, conversation history, scratchpads, and long-term memory.[[1]](https://google.com/goto?url=CAESagHEIkXXnbCKVx5YFwAklc1PlMP8vvJphvZD5hdzUqyBJaR7GK_7PhezWgGFqclMReHpaawqPA0lvzwQbXzgDle1JYSkA2aAviJQoNGLSPz6FurrZgbNhtoktzwzTSfPy-N733_v0ov_bUA)[[2]](https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_)[[3]](https://www.youtube.com/watch?v=lcpWbg0jiYU)[[4]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)",
+         "links": null,
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Philschmid",
+           "domain": "www.philschmid.de",
+           "url": "https://www.philschmid.de/context-engineering",
+           "title": "The New Skill in AI is Not Prompting, It's Context Engineering",
+           "text": "Definition: Context engineering is the dynamic system discipline of providing an LLM the right information, tools, and format at the right time to make a task solv..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "IBM",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_",
+           "title": "What Is Context Engineering? | IBM",
+           "text": "# Context engineering, defined Context engineering is the practice of deliberately designing, structuring and optimizing the conte..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=lcpWbg0jiYU",
+           "title": "Context Engineering Simply Explained",
+           "text": "since the time Andre Karpathi posted about context engineering on his Twitter this term has gained a lot of momentum over the inte..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "LangChain",
+           "domain": "www.langchain.com",
+           "url": "https://www.langchain.com/blog/context-engineering-for-agents",
+           "title": "Context Engineering",
+           "text": "Context Engineering: Managing LLM context windows by filling them with optimal information per agent step across instructions, kno..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": "Why It Matters (\"Context Rot\")",
+         "text": "Even as context windows grow larger, stuffing them with noisy, stale, or contradictory data degrades model reliability\u2014a phenomenon known as context rot. Common failure modes include:",
+         "markdown": "Even as context windows grow larger, stuffing them with noisy, stale, or contradictory data degrades model reliability\u2014a phenomenon known as **context rot** . Common failure modes include:[[1]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)[[2]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[3]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)",
+         "links": null,
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23",
+           "title": "Context engineering explained: What every AI developer should know",
+           "text": "Context engineering explained: What every AI developer should know systems smarter and way more reliable by the end of this video ..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Anthropic",
+           "domain": "www.anthropic.com",
+           "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+           "title": "Effective context engineering for AI agents \\ Anthropic",
+           "text": "Definition: Context engineering curates optimal token sets for LLM inference against attention scarcity and context rot. Components: System prompts require balance..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "DeepLearning.AI",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw",
+           "title": "Context Engineering - DeepLearning.AI",
+           "text": "# Build more reliable and efficient AI agents through more relevant and focused context * Agentic search: Retrieve data with multi..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": null,
+         "text": "Context poisoning: False or unverified claims entering the window and getting treated as fact. Context distraction: Excessive history or irrelevant details steering the model off track. Context confusion: Too many tools or cluttered instructions making selection error-prone. Context clash: Conflicting facts or rules inside the same context window.",
+         "markdown": "- **Context poisoning:** False or unverified claims entering the window and getting treated as fact.\n- **Context distraction:** Excessive history or irrelevant details steering the model off track.\n- **Context confusion:** Too many tools or cluttered instructions making selection error-prone.\n- **Context clash:** Conflicting facts or rules inside the same context window.[[1]](https://www.youtube.com/watch?v=BwXremQ-i6I&t=17)[[2]](https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23)",
+         "links": null,
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=BwXremQ-i6I&t=17",
+           "title": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
+           "text": "Context Engineering for AI Agents: 4 Failure Modes to Avoid so if we think about AI agents and we give them access to this big old..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23",
+           "title": "Context engineering explained: What every AI developer should know",
+           "text": "Context engineering explained: What every AI developer should know systems smarter and way more reliable by the end of this video ..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": "Core Strategies",
+         "text": "Select: Retrieve only relevant records, files, or memories just in time (via RAG, search, or metadata) rather than dumping entire datasets upfront. Compress: Summarize long histories, prune stale tool outputs, or trim low-value tokens to keep signal high and costs down. Write: Offload notes, plans, or state to external storage (scratchpads, files, or long-term memory) outside the active window. Isolate: Split work across sub-agents or separate contexts so one task's noise does not pollute another.",
+         "markdown": "- **Select:** Retrieve only relevant records, files, or memories just in time (via RAG, search, or metadata) rather than dumping entire datasets upfront.\n- **Compress:** Summarize long histories, prune stale tool outputs, or trim low-value tokens to keep signal high and costs down.\n- **Write:** Offload notes, plans, or state to external storage (scratchpads, files, or long-term memory) outside the active window.\n- **Isolate:** Split work across sub-agents or separate contexts so one task's noise does not pollute another.[[1]](https://google.com/goto?url=CAESegHEIkXXeRxIGCVxD9Qt74nRkxH-370FCc3uryvLMPQv___PXqqYbAPl4-vcEYnwR8RsCesp93IxiY1y6r0DKomSXKTSEFNBFJH4N0cT1TtvUwreaJrcbdv6dzJ98HQ6mY2CORNtfvogOs0Mr5ejk-IP3mGsGRMVNOJf)[[2]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[3]](https://www.youtube.com/watch?v=BwXremQ-i6I&t=17)[[4]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)",
+         "links": null,
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "LangChain",
+           "domain": "www.langchain.com",
+           "url": "https://www.langchain.com/blog/context-engineering-for-agents",
+           "title": "Context Engineering",
+           "text": "Context Engineering: Managing LLM context windows by filling them with optimal information per agent step across instructions, kno..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Anthropic",
+           "domain": "www.anthropic.com",
+           "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+           "title": "Effective context engineering for AI agents \\ Anthropic",
+           "text": "Definition: Context engineering curates optimal token sets for LLM inference against attention scarcity and context rot. Components: System prompts require balance..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "YouTube",
+           "domain": "www.youtube.com",
+           "url": "https://www.youtube.com/watch?v=BwXremQ-i6I&t=17",
+           "title": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
+           "text": "Context Engineering for AI Agents: 4 Failure Modes to Avoid so if we think about AI agents and we give them access to this big old..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "DeepLearning.AI",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw",
+           "title": "Context Engineering - DeepLearning.AI",
+           "text": "# Build more reliable and efficient AI agents through more relevant and focused context * Agentic search: Retrieve data with multi..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": null,
+         "text": "For deeper technical guides and hands-on practice, see Anthropic's research on context engineering for AI agents, the Context Engineering Guide, and the DeepLearning.AI Context Engineering course.",
+         "markdown": "For deeper technical guides and hands-on practice, see [Anthropic's research on context engineering for AI agents](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U) , the [Context Engineering Guide](https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw) , and the [DeepLearning.AI Context Engineering course](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw).[[1]](https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U)[[2]](https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw)[[3]](https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw)",
+         "links": [
+          {
+           "type": "link_element",
+           "title": "Anthropic's research on context engineering for AI agents",
+           "description": null,
+           "url": "https://google.com/goto?url=CAESiwEBxCJF19P1zUY7OPr6S9tbsOLH8jbluiHyeSzLCRqLOXhfshL7iD5VO4inIhXzMa6kySCzMlHb4plEtYuu4ONGK6wdvlV0d7hgVMs2MX4HGxNa4MbbTXu6qPDdZy78M4Rq9oJwceRZTpf5uNAW6Koyf9xv-4K6KJL9zM9dsn0O0HijOHorYhwifq4U",
+           "domain": "google.com"
+          },
+          {
+           "type": "link_element",
+           "title": "Context Engineering Guide",
+           "description": null,
+           "url": "https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw",
+           "domain": "google.com"
+          },
+          {
+           "type": "link_element",
+           "title": "DeepLearning.AI Context Engineering course",
+           "description": null,
+           "url": "https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw",
+           "domain": "google.com"
+          }
+         ],
+         "images": null,
+         "references": [
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Anthropic",
+           "domain": "www.anthropic.com",
+           "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+           "title": "Effective context engineering for AI agents \\ Anthropic",
+           "text": "Definition: Context engineering curates optimal token sets for LLM inference against attention scarcity and context rot. Components: System prompts require balance..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "Prompting Guide AI",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw",
+           "title": "Context Engineering Guide | Prompt Engineering Guide",
+           "text": "Context Engineering: Process of designing and optimizing instructions and relevant context for LLMs and multimodal models to perfo..."
+          },
+          {
+           "type": "ai_overview_reference",
+           "position": "left",
+           "source": "DeepLearning.AI",
+           "domain": "google.com",
+           "url": "https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw",
+           "title": "Context Engineering - DeepLearning.AI",
+           "text": "# Build more reliable and efficient AI agents through more relevant and focused context * Agentic search: Retrieve data with multi..."
+          }
+         ]
+        },
+        {
+         "type": "ai_overview_element",
+         "position": "left",
+         "title": null,
+         "text": "Are you building an AI agent, optimizing a RAG pipeline, or looking for practical implementation patterns (such as compaction, memory, or tool design)? Tell me what you're working on and I can tailor next steps.",
+         "markdown": "Are you building an **AI agent** , optimizing a **RAG pipeline** , or looking for **practical implementation patterns** (such as compaction, memory, or tool design)? Tell me what you're working on and I can tailor next steps.",
+         "links": null,
+         "images": null,
+         "references": null
+        }
+       ],
+       "references": [
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "Anthropic",
+         "domain": "www.anthropic.com",
+         "url": "https://www.anthropic.com/research/effective-context-engineering-for-ai-agents",
+         "title": "Effective context engineering for AI agents \\ Anthropic",
+         "text": "Definition: Context engineering curates optimal token sets for LLM inference against attention scarcity and context rot. Components: System prompts require balance..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "Philschmid",
+         "domain": "www.philschmid.de",
+         "url": "https://www.philschmid.de/context-engineering",
+         "title": "The New Skill in AI is Not Prompting, It's Context Engineering",
+         "text": "Definition: Context engineering is the dynamic system discipline of providing an LLM the right information, tools, and format at the right time to make a task solv..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "Prompting Guide AI",
+         "domain": "google.com",
+         "url": "https://google.com/goto?url=CAESewHEIkXXy1hMe__2LSo3C_vBJm0aLHyPl23Mn3139M_PEVKr1CGfV1KpFhfe-OooO7ogph15pBnhfF9tADYQSgpt32OrNTb1O_3ckGxs4OZF-pwtGOAdKR5cVDDmAa6nvQHJksm1OQPzaapR6bpb2SVSbJjgeptBE53jhw",
+         "title": "Context Engineering Guide | Prompt Engineering Guide",
+         "text": "Context Engineering: Process of designing and optimizing instructions and relevant context for LLMs and multimodal models to perform tasks effectively. Core Compon..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "LangChain",
+         "domain": "www.langchain.com",
+         "url": "https://www.langchain.com/blog/context-engineering-for-agents",
+         "title": "Context Engineering",
+         "text": "Context Engineering: Managing LLM context windows by filling them with optimal information per agent step across instructions, kno..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "IBM",
+         "domain": "google.com",
+         "url": "https://google.com/goto?url=CAEScQHEIkXXnvr1rfCDWugJxlEU3vJkMsBdiU47Ok7jwprUKk7NnkD7Tg9ai7QlpyjS9-z3n6sXs7AcBlGutshIJGYlJcNWEesx_iczLNX7rhQB9uLyLgcs5xdyBk8T--U6ijB401u99sMEodC9poooHoH_",
+         "title": "What Is Context Engineering? | IBM",
+         "text": "# Context engineering, defined Context engineering is the practice of deliberately designing, structuring and optimizing the conte..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "Splunk",
+         "domain": "google.com",
+         "url": "https://google.com/goto?url=CAESfQHEIkXX9koS-0e8ch6Bz5PJ9i1fhgqv4QHRrBuFwLDI6MYI2BTZSQtGOWNsOjG7NHIxAoA9PL2ckxh30GhQSqoCiQc7jxiIHb2jORip93ExwFiwLMbpBLjU-GbJyX4jTjqoNlBK412wzd4TRlUieI6GH5zSCdzuKU4sTphl",
+         "title": "What Is Context Engineering? - Splunk",
+         "text": "Context engineering moves beyond simple prompt crafting by treating the context window as a managed resource\u2014analogous to system R..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "YouTube",
+         "domain": "www.youtube.com",
+         "url": "https://www.youtube.com/watch?v=BBPQYtR7oUk&t=23",
+         "title": "Context engineering explained: What every AI developer should know",
+         "text": "Context engineering explained: What every AI developer should know systems smarter and way more reliable by the end of this video ..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "YouTube",
+         "domain": "www.youtube.com",
+         "url": "https://www.youtube.com/watch?v=lcpWbg0jiYU",
+         "title": "Context Engineering Simply Explained",
+         "text": "since the time Andre Karpathi posted about context engineering on his Twitter this term has gained a lot of momentum over the inte..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "DeepLearning.AI",
+         "domain": "google.com",
+         "url": "https://google.com/goto?url=CAESdAHEIkXXO1DQ_Ro8FQ5MbpdpJVxphAYrsKF7X-oOz3gOxVIOcfAdTmIuAm-WIvderRoq2vRNfiO6RwWpsaDQeuJm66X8gmt_phekUjcVs0NWcL7uMj8rY634s3A12y-Cj8RWn3uc6X1u1iHoKNZ-GaMa3CWw",
+         "title": "Context Engineering - DeepLearning.AI",
+         "text": "# Build more reliable and efficient AI agents through more relevant and focused context * Agentic search: Retrieve data with multi..."
+        },
+        {
+         "type": "ai_overview_reference",
+         "position": "right",
+         "source": "YouTube",
+         "domain": "www.youtube.com",
+         "url": "https://www.youtube.com/watch?v=BwXremQ-i6I&t=17",
+         "title": "Context Engineering for AI Agents: 4 Failure Modes to Avoid",
+         "text": "Context Engineering for AI Agents: 4 Failure Modes to Avoid so if we think about AI agents and we give them access to this big old..."
+        }
+       ],
+       "rectangle": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 1,
+       "rank_absolute": 2,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]",
+       "domain": "google.com",
+       "title": "Context Engineering for AI Agents: Why Prompts Are Just the ...",
+       "url": "https://google.com/goto?url=CAESjgEBxCJF199X_SfcTQCbPzB100uts7lMTWgC0ZoDx6skJOyiMIMlllrFJhm1z3G8v9pnvCHLBK3GDiwfmzMQWM278600WzhdPbFzetpYzg3flpbUytH_nYESNQtM75PCBRZCIcXWvzC3QIX5m0fHwicANMLk0kM_qv7r6VRYemN8rqgHXmNc6a0SjPtX2htG&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+       "cache_url": null,
+       "related_search_url": null,
+       "breadcrumb": "https://www.artifilog.com \u203a Productivity",
+       "website_name": "artifilog.com",
+       "is_image": false,
+       "is_video": false,
+       "is_featured_snippet": false,
+       "is_malicious": false,
+       "is_web_story": false,
+       "checks": null,
+       "description": "Oct 1, 2026 \u2014 This guide breaks down what context engineering means in 2026, the five patterns that actually matter, and how to build systems that scale\u00a0... Read more",
+       "pre_snippet": "10/01/2026 00:00:00",
+       "extended_snippet": null,
+       "images": null,
+       "amp_version": false,
+       "rating": null,
+       "price": null,
+       "highlighted": [
+        "what context engineering means in 2026"
+       ],
+       "links": [
+        {
+         "type": "link_element",
+         "title": "Read more",
+         "description": null,
+         "url": "https://google.com/goto?url=CAES5AEBxCJF12Y8_GjjYLHHtxOohQZeD7viimKbyGmjaQH4NJlT617FCu99RCk03yPRuI6pcdGHaWBxPtlJuuPmrwX2-hjhfhZYFYgdhQQTIvPXcnBP7KYZtuf9pupt3sl0_XxuloMTx8MvAtPiWzaL7LNKai2BiliRvAboNcynO8bTKElam5Jl2iLjQpC3CHm0tBxqDvtPTHosPKmSb3jdx6gTcSeneawAjc_oC0jyX2mR4j98VPAbCi05pMc1IWehF_3P8P2bM7DLSRI0fubwyw8y4gdUC6P9WhlQkF8w9YyWg79TNBc&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+         "domain": "google.com"
+        }
+       ],
+       "faq": null,
+       "extended_people_also_search": null,
+       "about_this_result": null,
+       "related_result": null,
+       "timestamp": "2026-10-01 00:00:00 +00:00",
+       "rectangle": null
+      },
+      {
+       "type": "video",
+       "rank_group": 1,
+       "rank_absolute": 3,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[5]/div[1]",
+       "items": [
+        {
+         "type": "video_element",
+         "source": "YouTube \u00b7 ARE AGI",
+         "title": "How to Give AI Agents the Right Context",
+         "timestamp": "2026-10-20 16:22:16 +00:00",
+         "url": "https://www.youtube.com/watch?v=YgoDhtUcUZs"
+        },
+        {
+         "type": "video_element",
+         "source": "daily.dev \u00b7 Google Cloud Tech",
+         "title": "Context engineering explained: What every AI developer...",
+         "timestamp": "2026-07-22 00:00:00 +00:00",
+         "url": "https://google.com/goto?url=CAESoAEBxCJF1989q3jdja2DyUqI55RQopPgOTgUrJ0no5vcYh39gtw_HMZbjcGw0M4OGm4yB3VLhi99UX0Z-aNixyX-TfiB9CH_eKy21UCQpa6wyOMPYPIeDdC29kboUWkr5nmLtgn4E33hXdDc3hr98HheRY2udEMVyU17tDWllpPVUJP3uCSRKnRXWaammMKDbckiTotKxKczI9QZReh6OIVb&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g"
+        },
+        {
+         "type": "video_element",
+         "source": "YouTube \u00b7 Analytics Camp",
+         "title": "Context Engineering Explained in Just 10 min (The Skill ...",
+         "timestamp": "2026-09-15 00:00:00 +00:00",
+         "url": "https://www.youtube.com/watch?v=523PQmw6_3k&vl=ru"
+        }
+       ],
+       "rectangle": null
+      },
+      {
+       "type": "people_also_ask",
+       "rank_group": 1,
+       "rank_absolute": 4,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]/div[1]",
+       "items": [
+        {
+         "type": "people_also_ask_element",
+         "title": "What is a context diagram in software engineering?",
+         "seed_question": null,
+         "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]",
+         "expanded_element": [
+          {
+           "type": "people_also_ask_ai_overview_expanded_element",
+           "items": null,
+           "references": null,
+           "asynchronous_ai_overview": true
+          }
+         ]
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "What does a content engineer do?",
+         "seed_question": null,
+         "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]",
+         "expanded_element": [
+          {
+           "type": "people_also_ask_ai_overview_expanded_element",
+           "items": null,
+           "references": null,
+           "asynchronous_ai_overview": true
+          }
+         ]
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "Is prompt engineering a component of context engineering?",
+         "seed_question": null,
+         "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3]",
+         "expanded_element": [
+          {
+           "type": "people_also_ask_ai_overview_expanded_element",
+           "items": null,
+           "references": null,
+           "asynchronous_ai_overview": true
+          }
+         ]
+        },
+        {
+         "type": "people_also_ask_element",
+         "title": "What is context in AI with an example?",
+         "seed_question": null,
+         "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]",
+         "expanded_element": [
+          {
+           "type": "people_also_ask_ai_overview_expanded_element",
+           "items": null,
+           "references": null,
+           "asynchronous_ai_overview": true
+          }
+         ]
+        }
+       ],
+       "rectangle": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 2,
+       "rank_absolute": 5,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[9]/div[1]/div[1]",
+       "domain": "google.com",
+       "title": "Context Engineering: The Discipline Behind Every Reliable ...",
+       "url": "https://google.com/goto?url=CAESqgEBxCJF12UxJLj-uVICH3Yi4DDwh-D6KhsPX-Qi-di5bb-9bSCxunNe8C6yQHpmz5pWdqPb0WLUMdD65RqQ-uJJE_EJHErT7qcL5a7ash9RbPMRq4yP4Kfzv51B_GxKmJIMkqxa2VdS1upzGvW_L57wiH_5EsDrUNUq_S0nJChjYxt4OnYY95Tt-4Gi9S9Vm8XD6eXiakCQmYv0BFjigbMgZbIqw0ODswHrJg&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+       "cache_url": null,
+       "related_search_url": null,
+       "breadcrumb": "10+ likes  \u00b7  5 months ago",
+       "website_name": "Medium\u00a0\u00b7\u00a0Andrew Miller",
+       "is_image": false,
+       "is_video": false,
+       "is_featured_snippet": false,
+       "is_malicious": false,
+       "is_web_story": false,
+       "checks": null,
+       "description": "But context engineering also covers what you do with the message history, how you structure system prompts, when you compress, when you isolate,\u00a0... Read more",
+       "pre_snippet": null,
+       "extended_snippet": null,
+       "images": null,
+       "amp_version": false,
+       "rating": null,
+       "price": null,
+       "highlighted": [
+        "context engineering"
+       ],
+       "links": [
+        {
+         "type": "link_element",
+         "title": "Read more",
+         "description": null,
+         "url": "https://google.com/goto?url=CAEShwIBxCJF13qwiKxU9VVf6EcENQlTaiRnoS1BDLLiaXXDVkKB4z9pFG4H8gSjrT2PLRWwweBLDkt1JUTp2RYxap5uYu_T1sOyKrXFYx3LdWIrfqFIvs02UcSrLnRQ-NiSSb76anMn_pb3yppNzIHnUEnCCLnq4nHWI3InuuGvXC1ZXgD-Wa7Xl_vw04I6kqFwWHO1L2u6d6PwDKYAnIENNiNM_g_jYNOaMBzhcgEUrAyfGKWCK4L-cPMEFJZq6IfnwZZulk_q10b4XwKBqsr-RO37nPS9e5pxuXQFYZEHMkUUvVteRZSDGRkCnpijjxL4QzoePeFLWhuFCxSQwJEuYHzncqxdUhhGjg&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+         "domain": "google.com"
+        }
+       ],
+       "faq": null,
+       "extended_people_also_search": null,
+       "about_this_result": null,
+       "related_result": null,
+       "timestamp": null,
+       "rectangle": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 3,
+       "rank_absolute": 6,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[11]/div[1]/div[1]",
+       "domain": "google.com",
+       "title": "Context engineering for AI agents: what to put in the context ...",
+       "url": "https://google.com/goto?url=CAESdgHEIkXXTxrzByd57TvwK-xZxIhwtWau3vErAX7VXE6tke8dKOQUovImtn9ajAvkex2i21dqX6vGrfiu-cDvElchGp67uq_9UDkcLC5HynXqFKkE24tQEnLzIeZ4UXQMNxWV25kfVDSW3yQm2kraOqB_nNhxACw&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+       "cache_url": null,
+       "related_search_url": null,
+       "breadcrumb": "https://stackthrow.com \u203a Blog",
+       "website_name": "stackthrow.com",
+       "is_image": false,
+       "is_video": false,
+       "is_featured_snippet": false,
+       "is_malicious": false,
+       "is_web_story": false,
+       "checks": null,
+       "description": "Sep 22, 2026 \u2014 Context engineering also covers instructions, tools, history, memory and how all of them evolve during a multi-step task. Do bigger context\u00a0... Read more",
+       "pre_snippet": "09/22/2026 00:00:00",
+       "extended_snippet": null,
+       "images": null,
+       "amp_version": false,
+       "rating": null,
+       "price": null,
+       "highlighted": [
+        "instructions, tools, history, memory"
+       ],
+       "links": [
+        {
+         "type": "link_element",
+         "title": "Read more",
+         "description": null,
+         "url": "https://google.com/goto?url=CAES5QEBxCJF18-9wkBDUwmQM5WcYYZS5-jm3mjXEZQ_Tnhch_3X_fWF6xH7Jb0PE4LuG-UwmXJ4Lv9NeRXFLHY0bQd_-gOfnvq93sdtyyqno3BxgY3D7DNUA3jklYBblcK4HSV1WwmwyYuO5ylc_AFymvpqYPDvDgCniUfomZLN34apBlauLUwypxRYutUvuOBFlLxp6W5AP_VF1Se5RSv_KNdQKJQfTeDRJKjQDz09VXllFeRLAj0yQOyM57fzHFOmvPiE2QZPbbLRehHPK9gSutdt1DqtXxPHIk_5PMJj-VZ-wesAcBaX&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+         "domain": "google.com"
+        }
+       ],
+       "faq": null,
+       "extended_people_also_search": null,
+       "about_this_result": null,
+       "related_result": null,
+       "timestamp": "2026-09-22 00:00:00 +00:00",
+       "rectangle": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 4,
+       "rank_absolute": 7,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[13]/div[1]/div[1]",
+       "domain": "google.com",
+       "title": "Context engineering - Learn AI - Miraheze",
+       "url": "https://google.com/goto?url=CAESbQHEIkXXIiDnnUfYkOBuK1Rz1IOSDKD4a455Nuuq6mgEvfwiFUjJEBo0YB4lsK5Rjf0656Q-oIXK2C5UXM02K2teGlD5XcczsXuxa0YzWlBXEn9C52y4rUMvADqTSMrYDNAYNrMVS2JQGwb-NgY&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+       "cache_url": null,
+       "related_search_url": null,
+       "breadcrumb": "https://ai.miraheze.org \u203a wiki \u203a Context_engineering",
+       "website_name": "Miraheze",
+       "is_image": false,
+       "is_video": false,
+       "is_featured_snippet": false,
+       "is_malicious": false,
+       "is_web_story": false,
+       "checks": null,
+       "description": "Context engineering is an emerging discipline within artificial intelligence that focuses on the systematic design, curation, and optimization of all\u00a0... Read more",
+       "pre_snippet": null,
+       "extended_snippet": null,
+       "images": null,
+       "amp_version": false,
+       "rating": null,
+       "price": null,
+       "highlighted": [
+        "an emerging discipline within artificial intelligence"
+       ],
+       "links": [
+        {
+         "type": "link_element",
+         "title": "Read more",
+         "description": null,
+         "url": "https://google.com/goto?url=CAESygEBxCJF12WhLCX92eiRvPkkatQBR5mNTS62LI3rH_dOxO7z7rGUHk9n8kIrgxfFc-aA1eUG4P5mqBMgfdB7B7XGikS6U0hPMs0S2HPNsgLC25bOZYome3n8XgkhVxEqKbfOs5iXAcejnxupqQwm8HgmYdDJtB9Mr97kWveiNxmkWjNVNMtVARDjh4YAdtQObz82fuoHW8Toir17suYE014cc5SseHyRBzdTETO59oy640NWhGZjSPGSr1pq0Y6SPDuTyFCJxZ-pajF9&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+         "domain": "google.com"
+        }
+       ],
+       "faq": null,
+       "extended_people_also_search": null,
+       "about_this_result": null,
+       "related_result": null,
+       "timestamp": null,
+       "rectangle": null
+      },
+      {
+       "type": "organic",
+       "rank_group": 5,
+       "rank_absolute": 8,
+       "page": 1,
+       "position": "left",
+       "xpath": "/html[1]/body[1]/div[3]/div[1]/div[13]/div[1]/div[2]/div[1]/div[2]/div[1]/div[1]/div[15]/div[1]/div[1]",
+       "domain": "google.com",
+       "title": "Context Engineering: Beyond Prompt Engineering",
+       "url": "https://google.com/goto?url=CAESoQEBxCJF15ifE-502oTkRGIhlHZrOH7pqwbB0o_SySy9phR7oR2CEF3TpT3JTY-OD9VGIGw696LBrIPl2jNy9w1Eg-ib2l3RM76Gnn_t9IvpxG0B8FiLO7xJjmWwkBbS7XlLj0Sl7mV-7zEpe9n_eblbTe3GYj9XoJUw9n_bWZtJdbp0eP-dEafbGyhbNBP-cjg9kKpCTVhb8tW07_eAOi9Tew&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+       "cache_url": null,
+       "related_search_url": null,
+       "breadcrumb": "https://www.cloudthat.com \u203a Home \u203a Blogs",
+       "website_name": "CloudThat",
+       "is_image": false,
+       "is_video": false,
+       "is_featured_snippet": false,
+       "is_malicious": false,
+       "is_web_story": false,
+       "checks": null,
+       "description": "Aug 19, 2026 \u2014 Context engineering is about everything else the model sees when it generates a response: the system prompt, but also tool definitions,\u00a0... Read more",
+       "pre_snippet": "08/19/2026 00:00:00",
+       "extended_snippet": null,
+       "images": null,
+       "amp_version": false,
+       "rating": null,
+       "price": null,
+       "highlighted": [
+        "about everything else the model sees when it generates a response"
+       ],
+       "links": [
+        {
+         "type": "link_element",
+         "title": "Read more",
+         "description": null,
+         "url": "https://google.com/goto?url=CAES_wEBxCJF102t0XNT414uehaJd9nC6EOgdzELzvQaSkIFm0rkhjKNZsp4qucj-TZ2LUNLkWueJZv6ojhUrz-j99hPk5teSARIsdxrBoRhRoXc5HznISrekdtAtrqYDmPbdyLZOoJFKyF31UcusODXSjC2tSDIpmpm70qvf2ODBwC-QB6AxFb4A-ZwgsCG3BbrZDpoUSk69PQuvwIx7C1I5vER-2E6sw9EElecm98hcmcGJOhgZuYdb-7uVehAOm2CTxWGsMb3ff5QQAeaOPNcxwAERhnVc7BWrAF859fbtad4GOnkkeBVtN8TfdZXwO_ZH6wMxPcubYidfIktF3FS4X0&gsessionid=ygZ3_vzm43yx27jTi4svPOpjZLjSxkXRgwyP00OmLF9TvytDwAJH3g",
+         "domain": "google.com"
+        }
+       ],
+       "faq": null,
+       "extended_people_also_search": null,
+       "about_this_result": null,
+       "related_result": null,
+       "timestamp": "2026-08-19 00:00:00 +00:00",
+       "rectangle": null
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
