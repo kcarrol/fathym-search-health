@@ -3,7 +3,7 @@
  * the same entry runs on a laptop and, later, hosted. Credentials are read when a tool needs them and are
  * never logged or returned.
  */
-import { join } from "@std/path";
+import { fromFileUrl, join } from "@std/path";
 
 /** An environment value, with an empty string (as .mcp.json passes an unset one) read as unset. */
 export const env = (name: string): string | undefined => Deno.env.get(name) || undefined;
@@ -25,7 +25,15 @@ export function devSpaceDir(): string {
 
 /** The watch list: seed terms and pages, edited by a person. */
 export function watchlistPath(): string {
-  return env("SEARCH_HEALTH_WATCHLIST") ?? new URL("../watchlist.json", import.meta.url).pathname;
+  return env("SEARCH_HEALTH_WATCHLIST") ?? watchlistPathFor(import.meta.url);
+}
+
+/**
+ * The watch list beside the repo root, as a file path for this platform. `URL.pathname` gave `/C:/…` on
+ * Windows, which can't be opened (fathym-deno/fathym-dev-space#143, QA 2026-11-20).
+ */
+export function watchlistPathFor(moduleUrl: string | URL, toPath: (url: URL) => string = fromFileUrl): string {
+  return toPath(new URL("../watchlist.json", moduleUrl));
 }
 
 /** DataForSEO login and password, from env or from a KEY=VALUE file (default ~/.config/dataforseo/env). */
