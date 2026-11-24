@@ -1,6 +1,6 @@
 # Design
 
-**Status:** accepted by Kilian, 2026-11-20 (6.1.4). Nothing is built yet; 6.2 builds it. Each choice below cites rows in
+**Status:** accepted by Kilian, 2026-11-20 (6.1.4); built in 6.2 (run locally, 2026-11-20) and 6.3 (Search Console, 2026-11-24). Each choice below cites rows in
 [`FEATURE-LOG.md`](FEATURE-LOG.md) (`#n`).
 
 ## The question it answers
@@ -271,7 +271,7 @@ sharing, Google-update markers, chart polish. No schedule and no alerts (D-6.6).
 Kilian's own workspace first. If it becomes a fixed part of dev-space operations, it moves to a team
 workspace, and the repo is likely remade in a Fathym GitHub organisation then (Kilian, 2026-11-20).
 
-## Risks found in the read (for 6.3, not 6.2)
+## Risks found in the read (for hosting, 6.4)
 
 - **The build may need a landing zone.** On both `integration` and round-10 docs, nothing builds until **Where images are kept** is saved
   in **Development**, which needs a connected cloud and a private landing zone (#9, #23). If Kilian's personal
@@ -279,12 +279,12 @@ workspace, and the repo is likely remade in a Fathym GitHub organisation then (K
   `get_workspace` answers this first.
 - **Connecting a personal GitHub account.** Development connects GitHub *organisations*. The repo is under
   `kcarrol`. Hosting builds clone it; access for Fathym is needed for a private repo (#9, #23).
-- **Search Console access.** A service account added as a user on the property, or Kilian's one-time OAuth
-  consent; whichever works, read-only.
+- **Search Console access.** Resolved in 6.3: Kilian's own OAuth consent (he is not an Owner, so a service
+  account can't be added). Hosted, the credential is his refresh token, held as an Environment value.
 - **A GitHub token for `Opportunities.Scan`.** Reading issues in the three repos needs a token with
   read access to them, held as an Environment value when hosted. A fine-grained, read-only token.
-- **The DataForSEO balance.** The account started on the $1 trial with a $50 top-up planned. Check the
-  balance (free `GET /v3/appendix/user_data`) before 6.2's first real pull.
+- **The DataForSEO balance.** About $0.008 after 6.2's proof pulls; the full pull (about $0.42) waits on the $50
+  minimum top-up (D-6.7). Check the balance (free `GET /v3/appendix/user_data`) before it.
 
 ## Not this
 

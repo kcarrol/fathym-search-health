@@ -1,8 +1,9 @@
 /**
- * Search Console access, read-only (`webmasters.readonly`). Two routes, tried in this order:
+ * Search Console access, read-only (`webmasters.readonly`). The credential file holds one of two shapes:
+ * - an OAuth refresh-token file (`client_id`, `client_secret`, `refresh_token`), written by
+ *   `deno task gsc-consent`. The route in use (6.3): anyone with access to the property can consent.
  * - a service-account JSON key (`client_email`, `private_key`), signing its own token (as the analytics
- *   workbench does for GA4). Google's Search Console pages do not say a service account works; 6.2 finds out.
- * - an OAuth refresh token file (`client_id`, `client_secret`, `refresh_token`), from Kilian's one-time consent.
+ *   workbench does for GA4). Only a property Owner can add the service account as a user.
  * The file is GSC_CREDENTIALS (default ~/.config/search-health/gsc.json), never in the repo.
  */
 import { join } from "@std/path";

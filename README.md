@@ -74,7 +74,8 @@ account's email to the property as a **Restricted** user under Settings → User
 ## Tests
 
 `deno task test`: site checks, DataForSEO parsing against recorded responses (2026-11-20), Search Console
-against Google's documented response shapes, the opportunities scan, the report, and the workbench through
-`fai run` over MCP, the API and the Web page.
+against Google's documented response shapes and its six reports, the consent helper and the OAuth token
+exchange (no network), the opportunities scan, the report and its export, the Web page, and the workbench
+through `fai run` over MCP, the API and the Web page.
 
 fai is pinned to 0.0.1009 in `deno.jsonc`, the version that runs it.

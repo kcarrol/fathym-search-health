@@ -58,6 +58,14 @@ async function watchSettings(): Promise<Watchlist> {
   return await readWatchlist().catch(() => WatchlistSchema.parse({}));
 }
 
+/**
+ * The latest answer of each kind, with what changed since the run before. Search Console also carries the six
+ * reports (`gsc/reports.ts`), read against the watch list's settings and the latest site check's sitemap.
+ *
+ * @param dataDir - the vault folder holding `snapshots/`
+ * @param watch - the watch list; read from `watchlist.json` (or its defaults) when omitted
+ * @returns one entry per kind; a kind never run has `LastRun: null`
+ */
 export async function current(dataDir: string, watch?: Watchlist) {
   const out: Record<string, unknown> = {};
   for (const kind of KINDS) {
@@ -102,7 +110,12 @@ export async function history(dataDir: string, kind: Kind, limit = 10) {
   return (await readHistory(dataDir, kind, limit)).map((s) => ({ Kind: s.Kind, Timestamp: new Date(s.Timestamp).toISOString(), File: `snapshots/${stamp(s.Timestamp)}-${s.Kind}.json` }));
 }
 
-/** Writes the latest results into dev-space; a person reviews and commits them. */
+/**
+ * Writes the latest results into dev-space; a person reviews and commits them. Each folder is dated by the pull
+ * it holds, not by today.
+ *
+ * @returns the paths written, relative to `devSpace`
+ */
 export async function exportToDevSpace(dataDir: string, devSpace: string) {
   // Each folder is dated by its own pull, so re-exporting an old pull never files it under today.
   const dated = (sn: Snapshot) => new Date(sn.Timestamp).toISOString().slice(0, 10);
@@ -163,6 +176,7 @@ function siteMarkdown(r: Record<string, unknown>): string {
   return md;
 }
 
+/** The Search Console section of the site-health export: the six reports, each with its source and limits. */
 function gscMarkdown(g: { LastRun: string; Range: { Start: string; End: string }; Totals: { Clicks: number; Impressions: number }; Reports: ReturnType<typeof searchConsoleReports> }): string {
   const R = g.Reports;
   const list = <T>(items: T[], line: (i: T) => string, none: string) => (items.length ? items.slice(0, 15).map((i) => `- ${line(i)}`).join("\n") : `- ${none}`) + "\n\n";

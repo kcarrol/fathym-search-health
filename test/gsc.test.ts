@@ -1,6 +1,7 @@
 /**
  * Search Console against responses shaped from Google's documented schemas (searchAnalytics.query,
- * urlInspection.index.inspect, sitemaps.list). No real response yet: access is pending (6.2.4).
+ * urlInspection.index.inspect, sitemaps.list), and the OAuth token exchange with fetch stubbed. The first real
+ * pull (2026-11-24) is recorded in Track 6 phase 6.3's Session Log.
  */
 import { assertEquals, assertRejects, assertStringIncludes } from "@std/assert";
 import { pullSearchConsole } from "../src/gsc/pull.ts";
