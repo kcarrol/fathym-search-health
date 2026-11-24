@@ -58,7 +58,10 @@ function openBrowser(url: string) {
 async function main() {
   const clientPath = Deno.args[0];
   if (!clientPath) throw new Error("Usage: deno task gsc-consent <path to the Desktop client JSON from Google Cloud>");
-  const client = readClient(await Deno.readTextFile(clientPath));
+  const json = await Deno.readTextFile(clientPath).catch(() => {
+    throw new Error(`No client file at ${clientPath}. Create a Desktop app client in Google Cloud and save its JSON there first (README.md, "Search Console access", steps 1-3).`);
+  });
+  const client = readClient(json);
   const { verifier, challenge } = await pkce();
   const state = b64url(crypto.getRandomValues(new Uint8Array(16)));
 
