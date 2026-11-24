@@ -77,6 +77,7 @@ export async function current(dataDir: string, watch?: Watchlist) {
       const cur = results<KeywordsResult>(latest)!;
       out.keywords = {
         LastRun, PreviousRun, Cost: cur.Cost, Balance: cur.Balance, Settings: cur.Settings ?? null, Sources: cur.Sources,
+        Note: cur.Settings ? undefined : "This pull predates the workbench recording its settings and reading SERP domains through Google's redirect (6.2.8): its limits are unknown and its SERP domains read google.com. The next pull records both.",
         WriteNext: cur.Candidates.filter((c) => c.FathymRank === null || c.FathymRank > 10).slice(0, 25),
         Ranked: cur.Ranked.slice(0, 25), Changes: diffKeywords(cur, results(previous)),
       };
@@ -84,7 +85,7 @@ export async function current(dataDir: string, watch?: Watchlist) {
       const cur = results<GscResult>(latest)!;
       const pulls = (await readHistory(dataDir, "searchconsole", 10)).map((p) => results<GscResult>(p)!);
       out.searchconsole = {
-        LastRun, PreviousRun, Range: cur.Range, Totals: cur.Totals, TopQueries: cur.Queries.slice(0, 25),
+        LastRun, PreviousRun, Range: cur.Range, Totals: cur.Totals, PreviousPeriod: cur.Previous ? { Range: cur.Previous.Range, Totals: cur.Previous.Totals ?? null } : null, TopQueries: cur.Queries.slice(0, 25),
         NotIndexed: cur.Inspected.filter((i) => i.Verdict && i.Verdict !== "PASS"), Sitemaps: cur.Sitemaps,
         Sources: cur.Sources, Changes: diffGsc(cur, results(previous)),
         Reports: searchConsoleReports(pulls, watch ?? await watchSettings(), results<SiteReport>((await readHistory(dataDir, "site", 1))[0])?.SitemapUrls),

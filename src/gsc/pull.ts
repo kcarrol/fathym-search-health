@@ -54,6 +54,8 @@ export interface GscResult {
   /** The period of the same length before this one. Absent in pulls before 6.3. */
   Previous?: {
     Range: { Start: string; End: string };
+    /** Absent in the first 6.3 pull. */
+    Totals?: { Clicks: number; Impressions: number };
     Queries: GscResult["Queries"];
     Pages: GscResult["Pages"];
   };
@@ -127,6 +129,7 @@ export async function pullSearchConsole(get: GscFetch, o: GscOptions): Promise<G
     QueryPages: queryPages.map((r) => ({ Query: r.keys[0], Page: r.keys[1], ...row(r) })),
     Previous: {
       Range: prevRange,
+      Totals: { Clicks: prevPages.reduce((s, r) => s + r.clicks, 0), Impressions: prevPages.reduce((s, r) => s + r.impressions, 0) },
       Queries: prevQueries.map((r) => ({ Query: r.keys[0], ...row(r) })),
       Pages: prevPages.map((r) => ({ Page: r.keys[0], ...row(r) })),
     },

@@ -53,6 +53,7 @@ Deno.test("gsc: query+page rows and the previous period of the same length, each
   assertEquals((e - s) / day, (pe - ps) / day);
   assertEquals((s - pe) / day, 1);
   assertEquals(r.Previous!.Pages[0].Clicks, 5);
+  assertEquals(r.Previous!.Totals, { Clicks: 5, Impressions: 120 });
   assertStringIncludes(r.Sources.QueryPages, "[query,page]");
   assertStringIncludes(r.Sources.Previous, r.Previous!.Range.Start);
 });
