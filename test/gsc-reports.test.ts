@@ -40,9 +40,36 @@ Deno.test("low CTR: under the ratio of the site's own median at that rounded pos
 
 Deno.test("cannibalisation: two or more of our pages with impressions on one query; one page per query is not", () => {
   const row = (Query: string, Page: string, Impressions: number) => ({ Query, Page, Impressions, Clicks: 0, Ctr: 0, Position: 5 });
-  const r = cannibalisation(pull({ QueryPages: [row("mcp server", "/a", 40), row("mcp server", "/b", 60), row("fai", "/fai", 90), row("x", "/c", 10), row("x", "/d", 0)] }));
+  const r = cannibalisation(pull({ QueryPages: [row("mcp server", "/a", 40), row("mcp server", "/b", 60), row("context", "/c", 90), row("x", "/c", 10), row("x", "/d", 0)] }), settings);
   assertEquals(r.Queries.map((x) => [x.Query, x.Pages.map((pg) => pg.Page)]), [["mcp server", ["/b", "/a"]]]);
-  assertEquals(cannibalisation(pull({ QueryPages: undefined })).Queries, []);
+  assertEquals(cannibalisation(pull({ QueryPages: undefined }), settings).Queries, []);
+});
+
+Deno.test("cannibalisation: brand and site: queries left out; an old URL beside its new one is a move (first real pull, 6.3.3)", () => {
+  const row = (Query: string, Page: string, Impressions: number) => ({ Query, Page, Impressions, Clicks: 0, Ctr: 0, Position: 5 });
+  const sitemap = new Set(["/blog/local-ai", "/", "/platform"]);
+  const r = cannibalisation(pull({
+    QueryPages: [
+      row("fathym", "/", 37), row("fathym", "/platform", 35),
+      row("site:fathym.com", "/", 8), row("site:fathym.com", "/platform", 8),
+      row("does local ai use tokens", "/blog/local-ai", 21), row("does local ai use tokens", "/blog/2026/05/19-local-ai", 8),
+      row("mcp", "/", 4), row("mcp", "/platform", 3),
+    ],
+  }), settings, sitemap);
+  assertEquals(r.Queries.map((q) => q.Query), ["mcp"]);
+  assertEquals(r.Moved.map((q) => q.Query), ["does local ai use tokens"]);
+  assertEquals(r.Moved[0].Pages.map((p) => p.InSitemap), [true, false]);
+  assertEquals(r.Excluded, 4);
+});
+
+Deno.test("falling: pages outside the sitemap are listed apart as moved or removed", () => {
+  const cur = pull({
+    Pages: [p("/blog/2026/05/19-local-ai", 5, 247, 0), p("/platform", 5, 100, 0)],
+    Previous: { Range: { Start: "2026-09-27", End: "2026-10-24" }, Queries: [], Pages: [p("/blog/2026/05/19-local-ai", 5, 2354, 19), p("/platform", 5, 141, 2)] },
+  });
+  const r = falling(cur, undefined, new Set(["/platform", "/blog/local-ai"]));
+  assertEquals(r.VsPreviousPeriod!.Pages.map((x) => x.Page), ["/platform"]);
+  assertEquals(r.VsPreviousPeriod!.MovedOrRemoved.map((x) => x.Page), ["/blog/2026/05/19-local-ai"]);
 });
 
 Deno.test("brand split: whole-word brand terms only ('fathymic' is not branded)", () => {

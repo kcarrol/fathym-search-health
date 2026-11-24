@@ -23,11 +23,14 @@ function gscReports(R: any): string {
 <h3>Striking distance <small>positions ${esc(sd.Band.MinPosition)}–${esc(sd.Band.MaxPosition)}, ≥ ${esc(sd.Band.MinImpressions)} impressions · ${esc(sd.Source)}</small></h3>
 ${table(["Query", "Position", "Impressions", "Clicks"], sd.Queries.slice(0, 25).map((q: any) => [esc(q.Query), esc(q.Position.toFixed(1)), esc(q.Impressions), esc(q.Clicks)]), "No query in the band.")}
 <h3>Falling <small>${f ? `against ${esc(f.PreviousRange.Start)} to ${esc(f.PreviousRange.End)} · ${esc(f.Source)}` : "no previous period in this pull"}</small></h3>
-${f ? table(["Page", "Clicks", "Impressions"], f.Pages.slice(0, 25).map((p: any) => [esc(p.Page), `${esc(p.Clicks.Was)} → ${esc(p.Clicks.Now)}`, `${esc(p.Impressions.Was)} → ${esc(p.Impressions.Now)}`]), "No page fell.") : ""}
+${f ? table(["Page", "Clicks", "Impressions"], f.Pages.slice(0, 25).map((p: any) => [esc(p.Page), `${esc(p.Clicks.Was)} → ${esc(p.Clicks.Now)}`, `${esc(p.Impressions.Was)} → ${esc(p.Impressions.Now)}`]), "No page in the sitemap fell.") : ""}
+${f ? table(["Query", "Clicks", "Impressions"], f.Queries.slice(0, 25).map((q: any) => [esc(q.Query), `${esc(q.Clicks.Was)} → ${esc(q.Clicks.Now)}`, `${esc(q.Impressions.Was)} → ${esc(q.Impressions.Now)}`]), "No query fell.") : ""}
+${f?.MovedOrRemoved?.length ? `<p class="m">${esc(f.MovedOrRemoved.length)} pages not in the sitemap (moved, removed or never listed) are left out: for a moved page, its loss is usually its new URL's gain.</p>` : ""}
 <h3>Low CTR for the position <small>under ${esc(lc.Ratio)} × the site's own median at that position · ${esc(lc.Source)}</small></h3>
 ${table(["Page", "Position", "CTR", "Site median", "Impressions"], lc.Pages.slice(0, 25).map((p: any) => [esc(p.Page), esc(p.RoundedPosition), pct(p.Ctr), pct(p.SiteMedianCtr), esc(p.Impressions)]), "No page flagged.")}
 <h3>Cannibalisation <small>${esc(c.Source ?? "no query+page rows")}</small></h3>
-${table(["Query", "Our pages (impressions)"], c.Queries.slice(0, 25).map((q: any) => [esc(q.Query), q.Pages.map((p: any) => `${esc(p.Page)} (${esc(p.Impressions)})`).join("<br>")]), "No query had two pages with impressions.")}
+<p class="m">${esc(c.Note)}</p>
+${table(["Query", "Our pages (impressions)"], c.Queries.slice(0, 25).map((q: any) => [esc(q.Query), q.Pages.map((p: any) => `${esc(p.Page)} (${esc(p.Impressions)})${p.InSitemap ? "" : " <small>not in sitemap</small>"}`).join("<br>")]), "No query had two pages in the sitemap with impressions.")}
 <h3>Branded split <small>${esc(b.Brand.join(", "))} · ${esc(b.Note)}</small></h3>
 ${table(["", "Queries", "Clicks", "Impressions"], [["Branded", esc(b.Branded.Queries), esc(b.Branded.Clicks), esc(b.Branded.Impressions)], ["Everything else", esc(b.NonBranded.Queries), esc(b.NonBranded.Clicks), esc(b.NonBranded.Impressions)]], "")}
 <h3>Indexing history <small>across ${esc(ih.PullsRead)} kept pulls</small></h3>

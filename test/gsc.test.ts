@@ -36,6 +36,9 @@ Deno.test("gsc: queries, pages, sitemaps and a rotating inspection batch, each w
   assertEquals(r.Totals, { Clicks: 3, Impressions: 120 });
   assertEquals(r.Sitemaps[0].Warnings, 1);
   assertEquals(r.Inspected.map((i) => i.Url), ["https://www.fathym.com/c", "https://www.fathym.com/a"]);
+  const many = Array.from({ length: 12 }, (_, i) => `https://www.fathym.com/p${i}`);
+  const r2 = await pullSearchConsole(fakeGoogle().get, { Property: "sc-domain:fathym.com", InspectUrls: many, InspectBatch: 12 });
+  assertEquals(r2.Inspected.map((i) => i.Url), many, "inspected five at a time, kept in batch order");
   assertEquals(r.NextInspectFrom, 1);
   assertStringIncludes(r.Sources.Queries, r.Range.Start);
   assertStringIncludes(seen[0], encodeURIComponent("sc-domain:fathym.com"));

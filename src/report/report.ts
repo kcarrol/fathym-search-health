@@ -87,7 +87,7 @@ export async function current(dataDir: string, watch?: Watchlist) {
         LastRun, PreviousRun, Range: cur.Range, Totals: cur.Totals, TopQueries: cur.Queries.slice(0, 25),
         NotIndexed: cur.Inspected.filter((i) => i.Verdict && i.Verdict !== "PASS"), Sitemaps: cur.Sitemaps,
         Sources: cur.Sources, Changes: diffGsc(cur, results(previous)),
-        Reports: searchConsoleReports(pulls, watch ?? await watchSettings()),
+        Reports: searchConsoleReports(pulls, watch ?? await watchSettings(), results<SiteReport>((await readHistory(dataDir, "site", 1))[0])?.SitemapUrls),
       };
     } else {
       const cur = results<OpportunitiesResult>(latest)!;
@@ -169,12 +169,13 @@ function gscMarkdown(g: { LastRun: string; Range: { Start: string; End: string }
   md += `### Striking distance\n\nPositions ${sd.Band.MinPosition}–${sd.Band.MaxPosition}, at least ${sd.Band.MinImpressions} impressions. Source: ${sd.Source}.\n\n`;
   md += list(sd.Queries, (q) => `${q.Query}: position ${q.Position.toFixed(1)}, ${q.Impressions} impressions, ${q.Clicks} clicks`, "No query in the band.");
   const f = R.Falling.VsPreviousPeriod;
-  md += `### Falling\n\n` + (f ? `Against ${f.PreviousRange.Start} to ${f.PreviousRange.End}. Source: ${f.Source}.\n\n` + list(f.Pages, (p) => `${p.Page}: clicks ${p.Clicks.Was} → ${p.Clicks.Now}, impressions ${p.Impressions.Was} → ${p.Impressions.Now}`, "No page fell.") : "This pull has no previous period.\n\n");
+  md += `### Falling\n\n` + (f ? `Against ${f.PreviousRange.Start} to ${f.PreviousRange.End}. Source: ${f.Source}.\n\n` + list(f.Pages, (p) => `${p.Page}: clicks ${p.Clicks.Was} → ${p.Clicks.Now}, impressions ${p.Impressions.Was} → ${p.Impressions.Now}`, "No page in the sitemap fell.") + (f.MovedOrRemoved.length ? `Not in the sitemap (moved, removed or never listed), ${f.MovedOrRemoved.length} pages: for a moved page, its loss is usually its new URL's gain.\n\n` : "") + `Queries that fell:\n\n` + list(f.Queries, (q) => `${q.Query}: clicks ${q.Clicks.Was} → ${q.Clicks.Now}, impressions ${q.Impressions.Was} → ${q.Impressions.Now}`, "No query fell.") : "This pull has no previous period.\n\n");
   const lc = R.LowCtr;
   md += `### Low CTR for the position\n\nUnder ${lc.Ratio} × the site's own median CTR at the same rounded position (3+ pages there), at least ${lc.MinImpressions} impressions. Source: ${lc.Source}.\n\n`;
   md += list(lc.Pages, (p) => `${p.Page}: CTR ${(p.Ctr * 100).toFixed(1)}% at position ${p.RoundedPosition}, site median ${(p.SiteMedianCtr * 100).toFixed(1)}% over ${p.PagesAtPosition} pages`, "No page flagged.");
   const c = R.Cannibalisation;
-  md += `### Cannibalisation\n\nSource: ${c.Source ?? "none"}.\n\n` + list(c.Queries, (q) => `${q.Query}: ${q.Pages.map((p) => `${p.Page} (${p.Impressions})`).join(", ")}`, "No query had two pages with impressions.");
+  md += `### Cannibalisation\n\n${c.Note ?? ""} Source: ${c.Source ?? "none"}.\n\n` + list(c.Queries, (q) => `${q.Query}: ${q.Pages.map((p) => `${p.Page} (${p.Impressions})`).join(", ")}`, "No query had two pages in the sitemap with impressions.");
+  if (c.Moved.length) md += `Moved (old URL beside its new one), ${c.Moved.length} queries, e.g. ${c.Moved.slice(0, 3).map((q) => q.Query).join("; ")}.\n\n`;
   const b = R.BrandSplit;
   md += `### Branded split\n\nBrand terms: ${b.Brand.join(", ")}. ${b.Note} Source: ${b.Source}.\n\n| | Queries | Clicks | Impressions |\n| --- | --- | --- | --- |\n| Branded | ${b.Branded.Queries} | ${b.Branded.Clicks} | ${b.Branded.Impressions} |\n| Everything else | ${b.NonBranded.Queries} | ${b.NonBranded.Clicks} | ${b.NonBranded.Impressions} |\n\n`;
   const ih = R.IndexingHistory;

@@ -36,6 +36,8 @@ export interface GscOptions {
   InspectUrls?: string[];
   InspectBatch?: number;
   InspectFrom?: number;
+  /** URL Inspection calls in flight at once (quota "600 QPM"). */
+  InspectConcurrency?: number;
 }
 
 interface AnalyticsRow { keys: string[]; clicks: number; impressions: number; ctr: number; position: number }
@@ -92,17 +94,24 @@ export async function pullSearchConsole(get: GscFetch, o: GscOptions): Promise<G
   const urls = o.InspectUrls ?? [];
   const from = urls.length ? (o.InspectFrom ?? 0) % urls.length : 0;
   const batch = urls.length ? [...urls, ...urls].slice(from, from + Math.min(o.InspectBatch ?? 100, urls.length)) : [];
-  const inspected: GscResult["Inspected"] = [];
-  for (const url of batch) {
-    const r = await get(INSPECT, { method: "POST", body: JSON.stringify({ inspectionUrl: url, siteUrl: o.Property }) }) as {
-      inspectionResult?: { indexStatusResult?: Record<string, string> };
-    };
-    const s = r.inspectionResult?.indexStatusResult ?? {};
-    inspected.push({
-      Url: url, Verdict: s.verdict, Coverage: s.coverageState, Indexing: s.indexingState, PageFetch: s.pageFetchState,
-      Robots: s.robotsTxtState, LastCrawl: s.lastCrawlTime, GoogleCanonical: s.googleCanonical, UserCanonical: s.userCanonical,
-    });
-  }
+  // Five at a time, in batch order: one at a time, 100 URLs took most of an 11-minute pull (6.3.3).
+  const inspected: GscResult["Inspected"] = new Array(batch.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < batch.length) {
+      const n = next++;
+      const url = batch[n];
+      const r = await get(INSPECT, { method: "POST", body: JSON.stringify({ inspectionUrl: url, siteUrl: o.Property }) }) as {
+        inspectionResult?: { indexStatusResult?: Record<string, string> };
+      };
+      const s = r.inspectionResult?.indexStatusResult ?? {};
+      inspected[n] = {
+        Url: url, Verdict: s.verdict, Coverage: s.coverageState, Indexing: s.indexingState, PageFetch: s.pageFetchState,
+        Robots: s.robotsTxtState, LastCrawl: s.lastCrawlTime, GoogleCanonical: s.googleCanonical, UserCanonical: s.userCanonical,
+      };
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(o.InspectConcurrency ?? 5, batch.length) }, worker));
 
   const row = (r: AnalyticsRow) => ({ Clicks: r.clicks, Impressions: r.impressions, Ctr: r.ctr, Position: r.position });
   return {

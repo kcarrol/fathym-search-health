@@ -239,8 +239,8 @@ organisation (publishing status "is not applicable to Internal"), otherwise **Ex
 **Changed after the first real pull (6.3.3, 2026-11-24).** The blog moved to flat URLs on 2026-10-29; the
 dated URLs answer 301 and are not in the sitemap. On the first pull the top "falling" page and most
 cannibalisation pairs were an old dated URL beside its new one, which is a move, not a loss or a conflict.
-So both reports now read the latest site check's sitemap: a page not in it is listed apart as **moved or
-removed**, and a query counts as cannibalised only when two or more pages **in the sitemap** get impressions.
+So both reports now read the latest site check's sitemap: a page not in it is listed apart as **not in the
+sitemap** (moved, removed, or never listed, as `/blog` itself is), and a query counts as cannibalised only when two or more pages **in the sitemap** get impressions.
 Brand queries and `site:` queries are left out of cannibalisation: many of our pages showing up for "fathym" is
 expected. URL Inspection runs five at a time (the per-site limit is "600 QPM"): one at a time, 100 URLs took
 most of an 11-minute pull.
