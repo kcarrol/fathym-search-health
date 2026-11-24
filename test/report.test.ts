@@ -38,7 +38,7 @@ Deno.test("current and export: read the snapshot files; export writes into dev-s
   assertEquals([r.site.Changes!.New.length, r.site.Changes!.Fixed.length], [1, 1]);
   assertEquals(r.keywords.LastRun, null);
   const e = await exportToDevSpace(data, dev);
-  assert(e.Written.some((p) => p.endsWith("site-health/" + new Date().toISOString().slice(0, 10) + "/README.md")));
+  assert(e.Written.some((p) => p.endsWith("site-health/" + new Date(2_000_000).toISOString().slice(0, 10) + "/README.md")), "dated by the pull, not today");
   assert((await Deno.readTextFile(join(dev, e.Written.find((p) => p.endsWith("README.md"))!))).includes("broken-link"));
 });
 

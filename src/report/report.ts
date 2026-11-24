@@ -104,7 +104,8 @@ export async function history(dataDir: string, kind: Kind, limit = 10) {
 
 /** Writes the latest results into dev-space; a person reviews and commits them. */
 export async function exportToDevSpace(dataDir: string, devSpace: string) {
-  const date = new Date().toISOString().slice(0, 10);
+  // Each folder is dated by its own pull, so re-exporting an old pull never files it under today.
+  const dated = (sn: Snapshot) => new Date(sn.Timestamp).toISOString().slice(0, 10);
   const report = await current(dataDir);
   const written: string[] = [];
   const write = async (rel: string, text: string) => {
@@ -115,7 +116,7 @@ export async function exportToDevSpace(dataDir: string, devSpace: string) {
   };
   const [kw] = await readHistory(dataDir, "keywords", 1);
   if (kw) {
-    const dir = `research/fathym-marketing/demand/${date}-search-health`;
+    const dir = `research/fathym-marketing/demand/${dated(kw)}-search-health`;
     await write(`${dir}/raw/dataforseo/keywords-pull.json`, JSON.stringify(kw.Results, null, 2));
     await write(`${dir}/README.md`, keywordsMarkdown(report.keywords as Record<string, unknown>));
   }
@@ -123,7 +124,7 @@ export async function exportToDevSpace(dataDir: string, devSpace: string) {
   const [opp] = await readHistory(dataDir, "opportunities", 1);
   const [gsc] = await readHistory(dataDir, "searchconsole", 1);
   if (site || opp || gsc) {
-    const dir = `research/fathym-marketing/site-health/${date}`;
+    const dir = `research/fathym-marketing/site-health/${dated([site, gsc, opp].filter(Boolean).sort((a, b) => b!.Timestamp - a!.Timestamp)[0]!)}`;
     if (site) await write(`${dir}/raw/site-check.json`, JSON.stringify(site.Results, null, 2));
     if (opp) await write(`${dir}/raw/opportunities.json`, JSON.stringify(opp.Results, null, 2));
     if (gsc) await write(`${dir}/raw/search-console.json`, JSON.stringify(gsc.Results, null, 2));
