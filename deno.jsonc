@@ -3,7 +3,8 @@
     "mcp": "fai run search-health.ts --mode MCP",
     "api": "fai run search-health.ts --mode API",
     "web": "fai run search-health.ts --mode Web",
-    "test": "deno test -A"
+    "test": "deno test -A",
+    "gsc-consent": "deno run --allow-net=127.0.0.1,accounts.google.com,oauth2.googleapis.com,www.googleapis.com --allow-read --allow-write --allow-env --allow-run scripts/gsc-consent.ts"
   },
   // `fai run` imports the bare "@fathym/fai/*" specifiers through this file. fAI is pinned to the CLI
   // that runs it (0.0.1009); steward, zod and the MCP SDK match fAI's own pins at that version, so one
