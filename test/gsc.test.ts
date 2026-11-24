@@ -5,6 +5,7 @@
 import { assertEquals, assertRejects, assertStringIncludes } from "@std/assert";
 import { pullSearchConsole } from "../src/gsc/pull.ts";
 import { fileTokenSource } from "../src/gsc/auth.ts";
+import { join } from "@std/path";
 
 function fakeGoogle() {
   const seen: string[] = [];
@@ -60,4 +61,35 @@ Deno.test("gsc: query+page rows and the previous period of the same length, each
 
 Deno.test("gsc: no credential file is a clear error that points at the README", async () => {
   await assertRejects(() => fileTokenSource("/nonexistent/gsc.json")(), Error, "README.md");
+});
+
+Deno.test("gsc: an OAuth refresh-token file is exchanged read-only, and the token is reused until it expires", async () => {
+  const path = join(await Deno.makeTempDir(), "gsc.json");
+  await Deno.writeTextFile(path, JSON.stringify({ client_id: "id", client_secret: "s", refresh_token: "rt" }));
+  const calls: URLSearchParams[] = [];
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (_url, init) => {
+    calls.push(new URLSearchParams(String(init?.body)));
+    return Promise.resolve(Response.json({ access_token: "at", expires_in: 3599 }));
+  };
+  try {
+    const token = fileTokenSource(path);
+    assertEquals([await token(), await token()], ["at", "at"]);
+    assertEquals(calls.length, 1);
+    assertEquals([calls[0].get("grant_type"), calls[0].get("refresh_token"), calls[0].get("client_id")], ["refresh_token", "rt", "id"]);
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
+
+Deno.test("gsc: Google refusing the refresh token is an error with Google's words", async () => {
+  const path = join(await Deno.makeTempDir(), "gsc.json");
+  await Deno.writeTextFile(path, JSON.stringify({ client_id: "id", client_secret: "s", refresh_token: "rt" }));
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = () => Promise.resolve(Response.json({ error: "invalid_grant", error_description: "Token has been expired or revoked." }, { status: 400 }));
+  try {
+    await assertRejects(() => fileTokenSource(path)(), Error, "invalid_grant Token has been expired or revoked.");
+  } finally {
+    globalThis.fetch = realFetch;
+  }
 });
