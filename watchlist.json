@@ -45,5 +45,16 @@
   "AdsVolume": true,
   "Candidates": 100,
   "SerpTop": 20,
-  "MaxEstimatedCost": 1
+  "MaxEstimatedCost": 1,
+  "Brand": [
+    "fathym",
+    "fathym workshops",
+    "fai"
+  ],
+  "StrikingDistance": {
+    "MinPosition": 4,
+    "MaxPosition": 20,
+    "MinImpressions": 20
+  },
+  "LowCtrRatio": 0.5
 }

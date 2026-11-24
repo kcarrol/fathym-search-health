@@ -24,6 +24,16 @@ export const WatchlistSchema = z.object({
   SerpTop: z.number().int().min(0).max(100).default(20),
   /** A pull whose estimate is above this stops before any paid call. */
   MaxEstimatedCost: z.number().default(1),
+  /** Search Console: queries containing one of these (whole words, any case) count as branded (D-6.8). */
+  Brand: z.array(z.string()).default(["fathym"]),
+  /** Search Console: the striking-distance band (positions, as in Onsite's report) and the impressions a query needs. */
+  StrikingDistance: z.object({
+    MinPosition: z.number().default(4),
+    MaxPosition: z.number().default(20),
+    MinImpressions: z.number().int().min(0).default(20),
+  }).default({ MinPosition: 4, MaxPosition: 20, MinImpressions: 20 }),
+  /** Search Console: a page is low-CTR under this share of the site's own median CTR at its position. Our setting, not a benchmark. */
+  LowCtrRatio: z.number().min(0).max(1).default(0.5),
 });
 export type Watchlist = z.infer<typeof WatchlistSchema>;
 

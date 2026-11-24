@@ -8,11 +8,15 @@ import { fileTokenSource } from "../src/gsc/auth.ts";
 
 function fakeGoogle() {
   const seen: string[] = [];
+  const ranges: string[] = [];
   const get = (url: string, init: RequestInit) => {
     seen.push(`${init.method} ${url}`);
+    if (url.includes("searchAnalytics") && !ranges.length) ranges.push(JSON.parse(String(init.body)).startDate);
     if (url.includes("searchAnalytics")) {
-      const dim = JSON.parse(String(init.body)).dimensions[0];
-      return Promise.resolve({ rows: [{ keys: [dim === "query" ? "unlimited ai tokens" : "https://www.fathym.com/blog/x"], clicks: 3, impressions: 120, ctr: 0.025, position: 11.2 }] });
+      const { dimensions, startDate } = JSON.parse(String(init.body));
+      const value = (d: string) => (d === "query" ? "unlimited ai tokens" : "https://www.fathym.com/blog/x");
+      const clicks = startDate === ranges[0] ? 3 : 5;
+      return Promise.resolve({ rows: [{ keys: dimensions.map(value), clicks, impressions: 120, ctr: 0.025, position: 11.2 }] });
     }
     if (url.endsWith("/sitemaps")) return Promise.resolve({ sitemap: [{ path: "https://www.fathym.com/sitemap.xml", lastDownloaded: "2026-11-18T00:00:00Z", errors: "0", warnings: "1" }] });
     if (url.includes("index:inspect")) {
@@ -35,6 +39,19 @@ Deno.test("gsc: queries, pages, sitemaps and a rotating inspection batch, each w
   assertEquals(r.NextInspectFrom, 1);
   assertStringIncludes(r.Sources.Queries, r.Range.Start);
   assertStringIncludes(seen[0], encodeURIComponent("sc-domain:fathym.com"));
+});
+
+Deno.test("gsc: query+page rows and the previous period of the same length, each with its source", async () => {
+  const { get } = fakeGoogle();
+  const r = await pullSearchConsole(get, { Property: "sc-domain:fathym.com", Days: 28 });
+  assertEquals(r.QueryPages![0], { Query: "unlimited ai tokens", Page: "https://www.fathym.com/blog/x", Clicks: 3, Impressions: 120, Ctr: 0.025, Position: 11.2 });
+  const day = 86_400_000;
+  const [s, e, ps, pe] = [r.Range.Start, r.Range.End, r.Previous!.Range.Start, r.Previous!.Range.End].map((d) => Date.parse(d));
+  assertEquals((e - s) / day, (pe - ps) / day);
+  assertEquals((s - pe) / day, 1);
+  assertEquals(r.Previous!.Pages[0].Clicks, 5);
+  assertStringIncludes(r.Sources.QueryPages, "[query,page]");
+  assertStringIncludes(r.Sources.Previous, r.Previous!.Range.Start);
 });
 
 Deno.test("gsc: no credential file is a clear error that points at the README", async () => {

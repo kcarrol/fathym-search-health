@@ -8,6 +8,8 @@ import type { Issue, SiteReport } from "../site/check.ts";
 import type { KeywordsResult } from "../keywords/pull.ts";
 import type { GscResult } from "../gsc/pull.ts";
 import type { OpportunitiesResult } from "../opportunities/scan.ts";
+import { searchConsoleReports } from "../gsc/reports.ts";
+import { readWatchlist, type Watchlist, WatchlistSchema } from "../watchlist.ts";
 
 const key = (i: Issue) => `${i.Kind} ${i.Url}`;
 
@@ -51,7 +53,12 @@ export function diffGsc(cur: GscResult, prev?: GscResult) {
 
 const results = <T>(s?: Snapshot) => s?.Results as T | undefined;
 
-export async function current(dataDir: string) {
+/** The watch list's Search Console settings, or their defaults if the file can't be read. */
+async function watchSettings(): Promise<Watchlist> {
+  return await readWatchlist().catch(() => WatchlistSchema.parse({}));
+}
+
+export async function current(dataDir: string, watch?: Watchlist) {
   const out: Record<string, unknown> = {};
   for (const kind of KINDS) {
     const [latest, previous] = await readHistory(dataDir, kind, 2);
@@ -75,10 +82,12 @@ export async function current(dataDir: string) {
       };
     } else if (kind === "searchconsole") {
       const cur = results<GscResult>(latest)!;
+      const pulls = (await readHistory(dataDir, "searchconsole", 10)).map((p) => results<GscResult>(p)!);
       out.searchconsole = {
         LastRun, PreviousRun, Range: cur.Range, Totals: cur.Totals, TopQueries: cur.Queries.slice(0, 25),
         NotIndexed: cur.Inspected.filter((i) => i.Verdict && i.Verdict !== "PASS"), Sitemaps: cur.Sitemaps,
         Sources: cur.Sources, Changes: diffGsc(cur, results(previous)),
+        Reports: searchConsoleReports(pulls, watch ?? await watchSettings()),
       };
     } else {
       const cur = results<OpportunitiesResult>(latest)!;
@@ -143,9 +152,32 @@ function siteMarkdown(r: Record<string, unknown>): string {
     md += `| Issue | Count |\n| --- | --- |\n${Object.entries(s.IssueCounts).map(([k, v]) => `| ${k} | ${v} |`).join("\n") || "| none | 0 |"}\n\n`;
     md += s.Issues.map((i) => `- **${i.Kind}** ${i.Url}: ${i.Detail} (HTTP ${i.Evidence.Status}, ${i.Evidence.FetchedAt})`).join("\n") + "\n\n";
   }
+  const g = r.searchconsole as { LastRun: string; Range: { Start: string; End: string }; Totals: { Clicks: number; Impressions: number }; Reports?: ReturnType<typeof searchConsoleReports> } | undefined;
+  if (g?.LastRun && g.Reports) md += gscMarkdown(g as Required<typeof g>);
   if (o?.LastRun) {
     md += `## Opportunities\n\nIssues changed since ${o.Since}, scanned ${o.LastRun}, that mention a watch-list term:\n\n`;
     md += o.Mentioning.map((i) => `- ${i.Repo}#${i.Number} ${i.Title} (${i.Mentions.join(", ")})`).join("\n") + "\n";
   }
+  return md;
+}
+
+function gscMarkdown(g: { LastRun: string; Range: { Start: string; End: string }; Totals: { Clicks: number; Impressions: number }; Reports: ReturnType<typeof searchConsoleReports> }): string {
+  const R = g.Reports;
+  const list = <T>(items: T[], line: (i: T) => string, none: string) => (items.length ? items.slice(0, 15).map((i) => `- ${line(i)}`).join("\n") : `- ${none}`) + "\n\n";
+  let md = `## Search Console\n\nPulled ${g.LastRun}, ${g.Range.Start} to ${g.Range.End}: ${g.Totals.Clicks} clicks, ${g.Totals.Impressions} impressions (sum of top page rows). Raw pull in \`raw/search-console.json\`.\n\n`;
+  const sd = R.StrikingDistance;
+  md += `### Striking distance\n\nPositions ${sd.Band.MinPosition}–${sd.Band.MaxPosition}, at least ${sd.Band.MinImpressions} impressions. Source: ${sd.Source}.\n\n`;
+  md += list(sd.Queries, (q) => `${q.Query}: position ${q.Position.toFixed(1)}, ${q.Impressions} impressions, ${q.Clicks} clicks`, "No query in the band.");
+  const f = R.Falling.VsPreviousPeriod;
+  md += `### Falling\n\n` + (f ? `Against ${f.PreviousRange.Start} to ${f.PreviousRange.End}. Source: ${f.Source}.\n\n` + list(f.Pages, (p) => `${p.Page}: clicks ${p.Clicks.Was} → ${p.Clicks.Now}, impressions ${p.Impressions.Was} → ${p.Impressions.Now}`, "No page fell.") : "This pull has no previous period.\n\n");
+  const lc = R.LowCtr;
+  md += `### Low CTR for the position\n\nUnder ${lc.Ratio} × the site's own median CTR at the same rounded position (3+ pages there), at least ${lc.MinImpressions} impressions. Source: ${lc.Source}.\n\n`;
+  md += list(lc.Pages, (p) => `${p.Page}: CTR ${(p.Ctr * 100).toFixed(1)}% at position ${p.RoundedPosition}, site median ${(p.SiteMedianCtr * 100).toFixed(1)}% over ${p.PagesAtPosition} pages`, "No page flagged.");
+  const c = R.Cannibalisation;
+  md += `### Cannibalisation\n\nSource: ${c.Source ?? "none"}.\n\n` + list(c.Queries, (q) => `${q.Query}: ${q.Pages.map((p) => `${p.Page} (${p.Impressions})`).join(", ")}`, "No query had two pages with impressions.");
+  const b = R.BrandSplit;
+  md += `### Branded split\n\nBrand terms: ${b.Brand.join(", ")}. ${b.Note} Source: ${b.Source}.\n\n| | Queries | Clicks | Impressions |\n| --- | --- | --- | --- |\n| Branded | ${b.Branded.Queries} | ${b.Branded.Clicks} | ${b.Branded.Impressions} |\n| Everything else | ${b.NonBranded.Queries} | ${b.NonBranded.Clicks} | ${b.NonBranded.Impressions} |\n\n`;
+  const ih = R.IndexingHistory;
+  md += `### Indexing history\n\nAcross ${ih.PullsRead} kept pulls. Source: ${ih.Source}.\n\n` + list(ih.Changes, (x) => `${x.Url}: ${x.Before.Verdict} → ${x.Now.Verdict} (${x.Now.Coverage ?? ""})`, "No verdict changed.");
   return md;
 }

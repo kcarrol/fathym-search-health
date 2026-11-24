@@ -41,3 +41,27 @@ Deno.test("current and export: read the snapshot files; export writes into dev-s
   assert(e.Written.some((p) => p.endsWith("site-health/" + new Date().toISOString().slice(0, 10) + "/README.md")));
   assert((await Deno.readTextFile(join(dev, e.Written.find((p) => p.endsWith("README.md"))!))).includes("broken-link"));
 });
+
+Deno.test("current and export: Search Console pulls carry the six reports, and the export gets a section", async () => {
+  const data = await Deno.makeTempDir();
+  const dev = await Deno.makeTempDir();
+  await Deno.mkdir(join(data, "snapshots"));
+  const gsc = (PulledAt: string, verdict: string) => ({
+    Property: "sc-domain:fathym.com", PulledAt, Range: { Start: "2026-10-25", End: "2026-11-21" }, Totals: { Clicks: 1, Impressions: 50 },
+    Queries: [{ Query: "fathym workbench", Clicks: 1, Impressions: 50, Ctr: 0.02, Position: 6 }], Pages: [], QueryPages: [],
+    Previous: { Range: { Start: "2026-09-27", End: "2026-10-24" }, Queries: [], Pages: [] }, Sitemaps: [],
+    Inspected: [{ Url: "https://www.fathym.com/a", Verdict: verdict }], NextInspectFrom: 0,
+    Sources: { Queries: "q", Pages: "p", QueryPages: "qp", Previous: "prev" },
+  });
+  const put = (ms: number, Results: unknown) => Deno.writeTextFile(join(data, "snapshots", `${stamp(ms)}-searchconsole.json`), JSON.stringify({ Timestamp: ms, Kind: "searchconsole", Results }));
+  await put(1_000_000, gsc("1", "PASS"));
+  await put(2_000_000, gsc("2", "NEUTRAL"));
+  const watch = { Brand: ["fathym"], StrikingDistance: { MinPosition: 4, MaxPosition: 20, MinImpressions: 20 }, LowCtrRatio: 0.5 } as never;
+  const r = await current(data, watch) as { searchconsole: { Reports: { StrikingDistance: { Queries: unknown[] }; BrandSplit: { Branded: { Clicks: number } }; IndexingHistory: { Changes: unknown[] } } } };
+  assertEquals(r.searchconsole.Reports.StrikingDistance.Queries.length, 1);
+  assertEquals(r.searchconsole.Reports.BrandSplit.Branded.Clicks, 1);
+  assertEquals(r.searchconsole.Reports.IndexingHistory.Changes.length, 1);
+  const e = await exportToDevSpace(data, dev);
+  const md = await Deno.readTextFile(join(dev, e.Written.find((p) => p.endsWith("README.md"))!));
+  assert(md.includes("### Striking distance") && md.includes("fathym workbench") && md.includes("PASS → NEUTRAL"));
+});

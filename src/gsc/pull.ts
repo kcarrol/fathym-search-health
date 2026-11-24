@@ -1,7 +1,8 @@
 /**
  * SearchConsole.Pull: fathym.com as Google sees it. Search Analytics (queries and pages), URL Inspection over
- * a rotating batch of sitemap URLs (per-site quota "2000 QPD", "600 QPM"), and the sitemaps Google read. Every
- * figure carries the call and the date range it came from.
+ * a rotating batch of sitemap URLs (per-site quota "2000 QPD", "600 QPM"), and the sitemaps Google read. Also
+ * queries and pages together (for cannibalisation) and the previous period of the same length (for decay), so
+ * the reports in `reports.ts` work from one pull. Every figure carries the call and the date range it came from.
  */
 import type { TokenSource } from "./auth.ts";
 
@@ -29,6 +30,8 @@ export interface GscOptions {
   /** Days of Search Analytics, ending 3 days ago ("Data is typically available after 2-3 days"). */
   Days?: number;
   RowLimit?: number;
+  /** Rows for the query+page call, which has many more combinations. */
+  QueryPageRowLimit?: number;
   /** URLs to inspect this run, and where in the sitemap list to start. */
   InspectUrls?: string[];
   InspectBatch?: number;
@@ -44,6 +47,14 @@ export interface GscResult {
   Totals: { Clicks: number; Impressions: number };
   Queries: { Query: string; Clicks: number; Impressions: number; Ctr: number; Position: number }[];
   Pages: { Page: string; Clicks: number; Impressions: number; Ctr: number; Position: number }[];
+  /** Queries and pages together, this period. Absent in pulls before 6.3. */
+  QueryPages?: { Query: string; Page: string; Clicks: number; Impressions: number; Ctr: number; Position: number }[];
+  /** The period of the same length before this one. Absent in pulls before 6.3. */
+  Previous?: {
+    Range: { Start: string; End: string };
+    Queries: GscResult["Queries"];
+    Pages: GscResult["Pages"];
+  };
   Sitemaps: { Path: string; LastSubmitted?: string; LastDownloaded?: string; Errors: number; Warnings: number }[];
   Inspected: {
     Url: string; Verdict?: string; Coverage?: string; Indexing?: string; PageFetch?: string; Robots?: string;
@@ -60,16 +71,21 @@ export async function pullSearchConsole(get: GscFetch, o: GscOptions): Promise<G
   const end = new Date(Date.now() - 3 * 86_400_000);
   const start = new Date(end.getTime() - ((o.Days ?? 28) - 1) * 86_400_000);
   const range = { Start: day(start), End: day(end) };
+  const prevEnd = new Date(start.getTime() - 86_400_000);
+  const prevRange = { Start: day(new Date(prevEnd.getTime() - ((o.Days ?? 28) - 1) * 86_400_000)), End: day(prevEnd) };
   const site = encodeURIComponent(o.Property);
-  const analytics = (dimension: string) =>
+  const analytics = (dimensions: string[], r = range, rowLimit = o.RowLimit ?? 1000) =>
     get(`${WM}/sites/${site}/searchAnalytics/query`, {
       method: "POST",
-      body: JSON.stringify({ startDate: range.Start, endDate: range.End, dimensions: [dimension], rowLimit: o.RowLimit ?? 1000 }),
-    }).then((r) => ((r as { rows?: AnalyticsRow[] }).rows ?? []));
+      body: JSON.stringify({ startDate: r.Start, endDate: r.End, dimensions, rowLimit }),
+    }).then((res) => ((res as { rows?: AnalyticsRow[] }).rows ?? []));
 
-  const [queries, pages, sitemaps] = await Promise.all([
-    analytics("query"),
-    analytics("page"),
+  const [queries, pages, queryPages, prevQueries, prevPages, sitemaps] = await Promise.all([
+    analytics(["query"]),
+    analytics(["page"]),
+    analytics(["query", "page"], range, o.QueryPageRowLimit ?? 5000),
+    analytics(["query"], prevRange),
+    analytics(["page"], prevRange),
     get(`${WM}/sites/${site}/sitemaps`, { method: "GET" }),
   ]);
 
@@ -99,6 +115,12 @@ export async function pullSearchConsole(get: GscFetch, o: GscOptions): Promise<G
     },
     Queries: queries.map((r) => ({ Query: r.keys[0], ...row(r) })),
     Pages: pages.map((r) => ({ Page: r.keys[0], ...row(r) })),
+    QueryPages: queryPages.map((r) => ({ Query: r.keys[0], Page: r.keys[1], ...row(r) })),
+    Previous: {
+      Range: prevRange,
+      Queries: prevQueries.map((r) => ({ Query: r.keys[0], ...row(r) })),
+      Pages: prevPages.map((r) => ({ Page: r.keys[0], ...row(r) })),
+    },
     Sitemaps: ((sitemaps as { sitemap?: Record<string, string>[] }).sitemap ?? []).map((m) => ({
       Path: m.path, LastSubmitted: m.lastSubmitted, LastDownloaded: m.lastDownloaded,
       Errors: Number(m.errors ?? 0), Warnings: Number(m.warnings ?? 0),
@@ -108,6 +130,8 @@ export async function pullSearchConsole(get: GscFetch, o: GscOptions): Promise<G
     Sources: {
       Queries: `searchAnalytics.query dimensions=[query] ${range.Start}..${range.End}`,
       Pages: `searchAnalytics.query dimensions=[page] ${range.Start}..${range.End}`,
+      QueryPages: `searchAnalytics.query dimensions=[query,page] ${range.Start}..${range.End}`,
+      Previous: `searchAnalytics.query dimensions=[query] and [page] ${prevRange.Start}..${prevRange.End}`,
       Totals: "sum of the page rows (the API returns top rows, not every row)",
       Sitemaps: "sitemaps.list",
       Inspected: "urlInspection.index.inspect",
