@@ -21,7 +21,7 @@ banner.
 | --- | --- | --- | --- |
 | `site-check` | `POST /site/check` | robots.txt, sitemap, every sitemap page, soft-200 probes, internal links | free |
 | `keywords-pull` | `POST /keywords/pull` | DataForSEO: what we rank for, suggestions around each seed, volume, SERP with AI Overview. `{"DryRun": true}` shows the estimate only | about $0.42 a run with the default watch list |
-| `searchconsole-pull` | `POST /searchconsole/pull` | Search Console: queries, pages, URL Inspection over a rotating sitemap batch, sitemaps | free (no price stated by Google) |
+| `searchconsole-pull` | `POST /searchconsole/pull` | Search Console: queries, pages and the two together, this period and the one before; URL Inspection over a rotating sitemap batch; sitemaps. `report-current` derives striking distance, falling, low CTR for the position, cannibalisation, the branded split and indexing history | free (no price stated by Google) |
 | `opportunities-scan` | `POST /opportunities/scan` | issues changed since the last scan in dev-space, web-runtime and fathym-research, with the watch-list terms each mentions | free |
 | `report-current` | `POST /report/current` | the latest answer of each kind, and what changed since the run before | free |
 | `report-history` | `POST /report/history` | past runs of one kind | free |
@@ -48,20 +48,28 @@ the repo.
 
 ## Search Console access
 
-Not set up yet (6.2.4). Google's docs say requests must be authorised by an authenticated user with OAuth
-2.0, read-only scope `https://www.googleapis.com/auth/webmasters.readonly`; whether a service account
-works is not stated. Try the service account first:
+Read-only, scope `https://www.googleapis.com/auth/webmasters.readonly`, through Google's API. The credential
+file is `GSC_CREDENTIALS` (default `~/.config/search-health/gsc.json`), outside the repo; the workbench reads
+either shape below.
 
-1. In Google Cloud, pick or create a project and enable the **Google Search Console API**.
-2. Create a service account (no roles needed), then a **JSON key** for it. Save it as
-   `~/.config/search-health/gsc.json` (`chmod 600`).
-3. In Search Console, open the fathym.com property → **Settings → Users and permissions → Add user**: the
-   service account's email (`…@….iam.gserviceaccount.com`), permission **Restricted**.
-4. Run `searchconsole-pull`. Record any refusal word for word in the Session Log.
+**Your own sign-in (OAuth), for anyone with access to the property.** This is the route in use (6.3).
 
-If Google refuses the service account, use OAuth instead: create an OAuth client (Desktop app) in the same
-project, sign in once as a user with access to the property, and save
-`{"client_id", "client_secret", "refresh_token"}` as the same file. The workbench reads either shape.
+1. In Google Cloud, signed in as the account that can see fathym.com in Search Console, create a project and
+   enable the **Google Search Console API**.
+2. **Google Auth Platform → Audience** (the OAuth consent screen): choose **Internal** if it is offered (the
+   project belongs to a Google Cloud organisation). Otherwise choose **External** and **Publish app** to
+   *In production*: in *Testing*, Google expires the refresh token after 7 days. An unverified External app
+   shows an "unverified app" screen once; continue past it for your own account.
+3. **Clients → Create client → Desktop app.** Download its JSON to `~/.config/search-health/client.json`.
+4. Run `deno task gsc-consent ~/.config/search-health/client.json`. A browser opens; sign in and allow read
+   access. It saves `~/.config/search-health/gsc.json` (mode 600) and lists the properties your account can
+   read, with your permission on each. It never prints a token.
+5. If the property it lists is not `sc-domain:fathym.com`, set `GSC_PROPERTY` to the one it lists.
+6. Run `searchconsole-pull`.
+
+**A service account, if you are an Owner of the property** (only Owners add users): create a service account
+and a JSON key in the same project, save the key as the credential file (`chmod 600`), and add the service
+account's email to the property as a **Restricted** user under Settings → Users and permissions.
 
 ## Tests
 

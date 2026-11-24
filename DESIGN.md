@@ -198,6 +198,48 @@ cost levers, and they live in `watchlist.json`, not code.
 - **Next, after a top-up:** a paid intent check for terms the AI proposes that no pull has covered
   (DataForSEO Labs `search_intent`, priced on the same Labs page as the other Labs calls).
 
+## What Search Console answers (6.3, Kilian, 2026-11-24)
+
+Search Console is where "what should we write next" gets its strongest answer: searches people already
+make that find us, rather than estimates. Six reports, taken as ideas from Onsite (onsite.so, #60), prior
+art for our own stack. Each is computed from the kept pulls, never by the AI, and carries the call and
+date range it came from.
+
+| Report | Reads | Answers |
+| --- | --- | --- |
+| Striking distance | queries, this period | Searches where we sit just off the top results (the watch list's band, positions 4–20 as in Onsite's report) with at least the watch list's minimum impressions: the cheapest wins |
+| Falling | queries and pages, this period and the previous one of the same length (one pull); and the last kept pull | What is losing clicks or impressions, so we refresh it before it goes |
+| Low CTR for the position | pages, this period | Pages that rank but don't get clicked: CTR under the watch list's `LowCtrRatio` times **the site's own** median CTR at the same rounded position (only where 3 or more pages share it). ⛔ No industry CTR curve: it would be a number without a source |
+| Cannibalisation | `[query, page]` together, this period | A query where two or more of our pages get impressions, so they compete |
+| Branded split | queries, this period | Clicks and impressions for queries containing a `Brand` term (whole words), against the rest: how much demand is for Fathym by name (D-6.8) |
+| Indexing history | URL Inspection across kept pulls | URLs whose verdict changed (PASS to anything else, or back) since they were last inspected |
+
+**Pull changes.** `SearchConsole.Pull` adds a `[query, page]` call and the previous period of the same length
+(queries, pages), so the first pull already shows decay. Change from run to run still comes from the vault.
+
+**Watch-list changes.** A person edits these, as before:
+
+- `Brand`: `["fathym", "fathym workshops", "fai"]`, branded forms only (D-6.8).
+- `StrikingDistance`: `{ "MinPosition": 4, "MaxPosition": 20, "MinImpressions": 20 }`. The band is Onsite's;
+  the minimum is our own setting.
+- `LowCtrRatio`: `0.5`, our own setting, not a benchmark.
+
+**Limits, said in every answer.** The API returns top rows, not every row, so sums are sums of top rows.
+Data arrives two to three days late. The `[query, page]` call is truncated the same way, so a pair below the
+row limit is missed.
+
+**Access.** Kilian is not an Owner of the property (Search Console: "You were granted permissions by an
+owner"), and only Owners add users, so the service account is out. The workbench reads with his own OAuth
+consent: a Desktop client in a Google Cloud project he creates, consented once with `deno task gsc-consent`.
+Its token lasts: the consent screen is **Internal** where the project belongs to a Google Cloud
+organisation (publishing status "is not applicable to Internal"), otherwise **External, In production**
+(Google states the 7-day expiry only for External in "Testing"). Hosting carries that token as a secret
+(6.4).
+
+**Not yet.** AI-assistant referrals (through the analytics workbench's GA4 route, #50), AI crawler logs (no
+server logs), 404s from URLs AI assistants made up. Not taken from Onsite: multi-site portfolios, teams and
+sharing, Google-update markers, chart polish. No schedule and no alerts (D-6.6).
+
 ## Alternatives considered and dropped
 
 | Alternative | Why dropped | Log |
